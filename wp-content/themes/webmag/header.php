@@ -105,40 +105,32 @@
 
 						$myposts = get_posts( array(
 							'numberposts' => 3,
-							// 'category' => 9, // get_the_category()[0]->cat_name,
 							// 'offset'=> 1,
 						) );
 
-						// foreach( $myposts as $post ){
-						// 	setup_postdata( $post );
+						if (!empty($myposts)) {
+							
+							foreach( $myposts as $post ){
+								setup_postdata( $post ); 
 
-						// 	// стандартный вывод записей
-						// }
-
-						if ( $query->have_posts() ) { // если в $query есть посты, то
-							while ( $query->have_posts() ) { // пока в $query есть посты
-								$query->the_post(); // мы будем их выводить при помощи функции the_post()
-								?>
-								<!-- Вывода постов, функции цикла: the_title() и т.д. // как мы будем их выводить, можем тут указать -->
-								<!-- например мы используем тег li, в нем выводим с помощью php-разметки the_title() -->
-								<!-- the_title() - это функция, которая позволяет вывести заголовок статьи -->
+								// стандартный вывод записей?>
 								<!-- post // вставка из index.html -->
-								<div class="post post-widget">
-									<!-- <a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a> -->
-									<a class="post-img" href="<?php the_permalink() ?>"> <!--  the_permalink() выводит ссылку на пост -->
-										<?php the_post_thumbnail() ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста -->
-									</a>
-									<div class="post-body">
-										<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+									<div class="post post-widget">
+										<!-- <a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a> -->
+										<a class="post-img" href="<?php the_permalink() ?>"> <!--  the_permalink() выводит ссылку на пост -->
+											<?php the_post_thumbnail() ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста -->
+										</a>
+										<div class="post-body">
+											<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3> <!-- the_title() - это функция, которая позволяет вывести заголовок статьи -->
+										</div>
 									</div>
-								</div>
-								<!-- /post -->
-								<?php 
-							}
+								<!-- /post -->															
+							<?php 
+							} 
 						} else {
-							echo "Постов нет"; // если постов не найдено - по таким параметрам постов нет
+							echo "Постов нет";
 						}
-
+		
 						wp_reset_postdata(); // сбрасываем переменную $post
 					?>
 

@@ -71,7 +71,7 @@ get_header(); // если get_header(); то тут выводит файл head
 						echo "Постов нет"; // если постов не найдено - по таким параметрам постов нет
 					}
 
-					wp_reset_postdata(); // Сбрасываем $post
+					wp_reset_postdata(); // сбрасываем переменную $post
 				?>
 				<!-- /post -->
 
@@ -138,7 +138,7 @@ get_header(); // если get_header(); то тут выводит файл head
 						echo "Постов нет";
 					}
 
-					wp_reset_postdata(); // Сбрасываем $post
+					wp_reset_postdata(); // сбрасываем переменную $post
 				?>
 				<!-- /post -->
 
