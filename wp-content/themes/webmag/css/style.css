@@ -522,6 +522,7 @@ RESPONSIVE
 }
  .post .post-img > img {
      width: 100%;
+     height: 100%;  /* добавлено */
 }
  .post .post-meta {
      margin-top: 15px;

@@ -25,7 +25,7 @@ get_header(); // если get_header(); то тут выводит файл head
 		<div class="container">
 			<!-- row -->
 			<div class="row">	
-				<!-- post динамический -->
+				<!-- post динамический // Цикл на основе WP_Query() -->
 				<!-- стороим цикл через https://wp-kama.ru/handbook/cheatsheet -->
 				<?php		
 					global $post; // создается глобальная переменная $post, в нее будут помещаться параметры постов
@@ -100,7 +100,7 @@ get_header(); // если get_header(); то тут выводит файл head
 					</div>
 				</div>
 
-				<!-- post динамический -->
+				<!-- post динамический // Цикл на основе WP_Query() -->
 				<?php		
 					global $post;
 
@@ -144,10 +144,51 @@ get_header(); // если get_header(); то тут выводит файл head
 
 				<div class="clearfix visible-md visible-lg"></div>  <!-- можно удалить -->
 
+				<!-- Цикл на основе get_posts() -->
+				<?php
+					global $post;
+
+					$myposts = get_posts( array(
+						'numberposts' => 3,
+						// 'offset'=> 1,
+					) );
+
+					if (!empty($myposts)) {
+						
+						foreach( $myposts as $post ){
+							setup_postdata( $post ); 
+
+							// стандартный вывод записей?>
+							<!-- post // вставка из index.html -->
+								<div class="col-md-4">
+									<div class="post">
+										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+										<div class="post-body">
+											<div class="post-meta">
+											<a class="post-category cat-1" href="category.html">
+												<?php echo get_the_category()[0]->cat_name ?>
+											</a>
+											<span class="post-date"><?php the_date('F j, Y') ?></span>
+											</div>
+											<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+										</div>
+									</div>
+								</div>
+							<!-- /post -->															
+						<?php 
+						} 
+						
+					} else {
+						echo "Постов нет";
+					}
+	
+					wp_reset_postdata(); // сбрасываем переменную $post
+				?>
+
 				<!-- post -->
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-6.jpg" alt=""></a>
+						<a class="post-img" href="blog-post.html"><img src=./img/post-6.jpg" alt=""></a>
 						<div class="post-body">
 							<div class="post-meta">
 								<a class="post-category cat-2" href="category.html">JavaScript</a>
@@ -156,13 +197,13 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-1.jpg" alt=""></a>
+						<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
 						<div class="post-body">
 							<div class="post-meta">
 								<a class="post-category cat-4" href="category.html">Css</a>
@@ -171,13 +212,13 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-2.jpg" alt=""></a>
+						<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
 						<div class="post-body">
 							<div class="post-meta">
 								<a class="post-category cat-1" href="category.html">Web Design</a>
@@ -186,7 +227,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /post -->
 			</div>
 			<!-- /row -->
@@ -195,10 +236,39 @@ get_header(); // если get_header(); то тут выводит файл head
 			<div class="row">
 				<div class="col-md-8">
 					<div class="row">
-						<!-- post -->
-						<div class="col-md-12">
+						<!-- post // Цикл на основе query_posts() -->
+						<?php
+							query_posts('posts_per_page=1');
+							if (have_posts()) {
+								while (have_posts()) {
+									the_post();
+									// the_title();
+									// the_content();
+									?>
+										<div class="col-md-12">
+											<div class="post post-thumb">
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<div class="post-body">
+													<div class="post-meta">
+														<a class="post-category cat-1" href="category.html">
+															<?php echo get_the_category()[0]->cat_name ?>
+														</a>
+														<span class="post-date"><?php the_date('F j, Y') ?></span>
+													</div>
+													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+												</div>
+											</div>
+										</div>
+									<?php
+								}
+							} else echo 'Записей нет';
+	
+							wp_reset_query(); // сбрасываем глобальные переменные запроса на начальные
+						?>
+
+						<!-- <div class="col-md-12">
 							<div class="post post-thumb">
-								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-2.jpg" alt=""></a>
+								<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
 								<div class="post-body">
 									<div class="post-meta">
 										<a class="post-category cat-3" href="category.html">Jquery</a>
@@ -207,13 +277,45 @@ get_header(); // если get_header(); то тут выводит файл head
 									<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
+						<!-- post // Цикл на основе query_posts() -->
+						<?php
+							query_posts('posts_per_page=2&order=ASC');
+							if (have_posts()) {
+								while (have_posts()) {
+									the_post();
+									// the_title();
+									// the_content();
+									?>
+										<div class="col-md-6">
+											<div class="post">
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<div class="post-body">
+													<div class="post-meta">
+														<a class="post-category cat-1" href="category.html">
+															<?php echo get_the_category()[0]->cat_name ?>
+														</a>
+														<span class="post-date"><?php the_date('F j, Y') ?></span>
+													</div>
+													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+												</div>
+											</div>
+										</div>
+									<?php
+								}
+							} else echo 'Записей нет';
+	
+							wp_reset_query(); // сбрасываем глобальные переменные запроса на начальные
+						?>
+
+						<!-- /post // Цикл на основе query_posts() -->
+
 						<!-- post -->
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-1.jpg" alt=""></a>
+								<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
 								<div class="post-body">
 									<div class="post-meta">
 										<a class="post-category cat-4" href="category.html">Css</a>
@@ -222,13 +324,13 @@ get_header(); // если get_header(); то тут выводит файл head
 									<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
 						<!-- post -->
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-2.jpg" alt=""></a>
+								<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
 								<div class="post-body">
 									<div class="post-meta">
 										<a class="post-category cat-1" href="category.html">Web Design</a>
@@ -237,13 +339,54 @@ get_header(); // если get_header(); то тут выводит файл head
 									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
 						<div class="clearfix visible-md visible-lg"></div>  <!-- можно удалить -->
 
+						<!-- Цикл на основе get_posts() -->
+						<?php
+							global $post;
+
+							$myposts = get_posts( array(
+								'numberposts' => 2,
+								// 'offset'=> 1,
+							) );
+
+							if (!empty($myposts)) {
+								
+								foreach( $myposts as $post ){
+									setup_postdata( $post ); 
+
+									// стандартный вывод записей?>
+									<!-- post // вставка из index.html -->
+										<div class="col-md-6">
+											<div class="post">
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<div class="post-body">
+													<div class="post-meta">
+													<a class="post-category cat-1" href="category.html">
+														<?php echo get_the_category()[0]->cat_name ?>
+													</a>
+													<span class="post-date"><?php the_date('F j, Y') ?></span>
+													</div>
+													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+												</div>
+											</div>
+										</div>
+									<!-- /post -->															
+								<?php 
+								} 
+								
+							} else {
+								echo "Постов нет";
+							}
+			
+							wp_reset_postdata(); // сбрасываем переменную $post
+						?>
+
 						<!-- post -->
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="post">
 								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-4.jpg" alt=""></a>
 								<div class="post-body">
@@ -254,11 +397,11 @@ get_header(); // если get_header(); то тут выводит файл head
 									<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
 						<!-- post -->
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="post">
 								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-5.jpg" alt=""></a>
 								<div class="post-body">
@@ -269,13 +412,55 @@ get_header(); // если get_header(); то тут выводит файл head
 									<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
 						<div class="clearfix visible-md visible-lg"></div>  <!-- можно удалить -->
 
+						<!-- Цикл на основе get_posts() -->
+						<?php
+							global $post;
+
+							$myposts = get_posts( array(
+								'numberposts' => 2,
+								// 'offset'=> 1,
+								'order'       => 'ASC',
+							) );
+
+							if (!empty($myposts)) {
+								
+								foreach( $myposts as $post ){
+									setup_postdata( $post ); 
+
+									// стандартный вывод записей?>
+									<!-- post // вставка из index.html -->
+										<div class="col-md-6">
+											<div class="post">
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<div class="post-body">
+													<div class="post-meta">
+													<a class="post-category cat-1" href="category.html">
+														<?php echo get_the_category()[0]->cat_name ?>
+													</a>
+													<span class="post-date"><?php the_date('F j, Y') ?></span>
+													</div>
+													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+												</div>
+											</div>
+										</div>
+									<!-- /post -->															
+								<?php 
+								} 
+								
+							} else {
+								echo "Постов нет";
+							}
+			
+							wp_reset_postdata(); // сбрасываем переменную $post
+						?>
+
 						<!-- post -->
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="post">
 								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-3.jpg" alt=""></a>
 								<div class="post-body">
@@ -286,11 +471,11 @@ get_header(); // если get_header(); то тут выводит файл head
 									<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
 						<!-- post -->
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="post">
 								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-4.jpg" alt=""></a>
 								<div class="post-body">
@@ -301,7 +486,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 					</div>
 				</div>
@@ -313,7 +498,40 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h2>Most Read</h2>
 						</div>
 
-						<div class="post post-widget">
+						<!-- Цикл на основе get_posts() -->
+						<?php
+							global $post;
+
+							$myposts = get_posts( array(
+								'numberposts' => 4,
+								// 'offset'=> 1,
+							) );
+
+							if (!empty($myposts)) {
+								
+								foreach( $myposts as $post ){
+									setup_postdata( $post ); 
+
+									// стандартный вывод записей?>
+									<!-- post // вставка из index.html -->
+										<div class="post post-widget">
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<div class="post-body">
+												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+											</div>
+										</div>
+									<!-- /post -->															
+								<?php 
+								} 
+								
+							} else {
+								echo "Постов нет";
+							}
+			
+							wp_reset_postdata(); // сбрасываем переменную $post
+						?>
+
+						<!-- <div class="post post-widget">
 							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/widget-1.jpg" alt=""></a>
 							<div class="post-body">
 								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
@@ -339,7 +557,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<div class="post-body">
 								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<!-- /post widget -->
 
@@ -348,7 +566,48 @@ get_header(); // если get_header(); то тут выводит файл head
 						<div class="section-title">
 							<h2>Featured Posts</h2>
 						</div>
-						<div class="post post-thumb">
+
+						<!-- Цикл на основе get_posts() -->
+						<?php
+							global $post;
+
+							$myposts = get_posts( array(
+								'numberposts' => 2,
+								// 'offset'=> 1,
+								'category'    => 4,
+							) );
+
+							if (!empty($myposts)) {
+								
+								foreach( $myposts as $post ){
+									setup_postdata( $post ); 
+
+									// стандартный вывод записей?>
+									<!-- post // вставка из index.html -->
+										<div class="post post-thumb">
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<div class="post-body">
+												<div class="post-meta">
+													<a class="post-category cat-1" href="category.html">
+														<?php echo get_the_category()[0]->cat_name ?>
+													</a>
+													<span class="post-date"><?php the_date('F j, Y') ?></span>
+												</div>
+												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+											</div>
+										</div>
+									<!-- /post -->															
+								<?php 
+								} 
+								
+							} else {
+								echo "Постов нет";
+							}
+			
+							wp_reset_postdata(); // сбрасываем переменную $post
+						?>
+
+						<!-- <div class="post post-thumb">
 							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-2.jpg" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
@@ -368,7 +627,7 @@ get_header(); // если get_header(); то тут выводит файл head
 								</div>
 								<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<!-- /post widget -->
 					
@@ -399,8 +658,49 @@ get_header(); // если get_header(); то тут выводит файл head
 					</div>
 				</div>
 
+				<!-- Цикл на основе get_posts() -->
+				<?php
+					global $post;
+
+					$myposts = get_posts( array(
+						'numberposts' => 3,
+						// 'offset'=> 1,
+					) );
+
+					if (!empty($myposts)) {
+						
+						foreach( $myposts as $post ){
+							setup_postdata( $post ); 
+
+							// стандартный вывод записей?>
+							<!-- post // вставка из index.html -->
+								<div class="col-md-4">
+									<div class="post">
+										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+										<div class="post-body">
+											<div class="post-meta">
+												<a class="post-category cat-1" href="category.html">
+													<?php echo get_the_category()[0]->cat_name ?>
+												</a>
+												<span class="post-date"><?php the_date('F j, Y') ?></span>
+											</div>
+											<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+										</div>
+									</div>
+								</div>
+							<!-- /post -->															
+						<?php 
+						} 
+						
+					} else {
+						echo "Постов нет";
+					}
+	
+					wp_reset_postdata(); // сбрасываем переменную $post
+				?>
+
 				<!-- post -->
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<div class="post">
 						<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
 						<div class="post-body">
@@ -411,11 +711,11 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<div class="post">
 						<a class="post-img" href="blog-post.html"><img src="./img/post-5.jpg" alt=""></a>
 						<div class="post-body">
@@ -426,11 +726,11 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<div class="post">
 						<a class="post-img" href="blog-post.html"><img src="./img/post-3.jpg" alt=""></a>
 						<div class="post-body">
@@ -441,7 +741,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- /post -->
 			</div>
 			<!-- /row -->
@@ -463,8 +763,51 @@ get_header(); // если get_header(); то тут выводит файл head
 								<h2>Most Read</h2>
 							</div>
 						</div>
+
+						<!-- Цикл на основе get_posts() -->
+						<?php
+							global $post;
+
+							$myposts = get_posts( array(
+								'numberposts' => 4,
+								// 'offset'=> 1,
+							) );
+
+							if (!empty($myposts)) {
+								
+								foreach( $myposts as $post ){
+									setup_postdata( $post ); 
+
+									// стандартный вывод записей?>
+									<!-- post // вставка из index.html -->
+										<div class="col-md-12">
+											<div class="post post-row">
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<div class="post-body">
+													<div class="post-meta">
+														<a class="post-category cat-1" href="category.html">
+															<?php echo get_the_category()[0]->cat_name ?>
+														</a>
+														<span class="post-date"><?php the_date('F j, Y') ?></span>
+													</div>
+													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+													<p><?php the_content() ?></p>
+												</div>
+											</div>
+										</div>
+									<!-- /post -->															
+								<?php 
+								} 
+								
+							} else {
+								echo "Постов нет";
+							}
+			
+							wp_reset_postdata(); // сбрасываем переменную $post
+						?>
+
 						<!-- post -->
-						<div class="col-md-12">
+						<!-- <div class="col-md-12">
 							<div class="post post-row">
 								<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
 								<div class="post-body">
@@ -476,11 +819,11 @@ get_header(); // если get_header(); то тут выводит файл head
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
 						<!-- post -->
-						<div class="col-md-12">
+						<!-- <div class="col-md-12">
 							<div class="post post-row">
 								<a class="post-img" href="blog-post.html"><img src="./img/post-6.jpg" alt=""></a>
 								<div class="post-body">
@@ -492,11 +835,11 @@ get_header(); // если get_header(); то тут выводит файл head
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 
 						<!-- post -->
-						<div class="col-md-12">
+						<!-- <div class="col-md-12">
 							<div class="post post-row">
 								<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
 								<div class="post-body">
@@ -508,11 +851,11 @@ get_header(); // если get_header(); то тут выводит файл head
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 						
 						<!-- post -->
-						<div class="col-md-12">
+						<!-- <div class="col-md-12">
 							<div class="post post-row">
 								<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
 								<div class="post-body">
@@ -524,7 +867,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- /post -->
 						
 						<div class="col-md-12">
