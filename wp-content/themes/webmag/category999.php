@@ -7,7 +7,7 @@
  * @package Webmag
  */
 
-get_header('page');
+get_header('category');
 ?>
 
 	<!-- section -->
@@ -18,8 +18,6 @@ get_header('page');
 				<div class="row">
 					<div class="col-md-8">
 						<div class="row">
-
-						<h2>КАТЕГОРИЯ</h2>
 
 						<?php if ( have_posts() ) :
 							/* Start the Loop */
@@ -68,7 +66,6 @@ get_header('page');
 												setup_postdata( $post ); 
 												?>
 												<!-- post -->
-												<h2>КАТЕГОРИИ</h2>
 													<div class="col-md-6">
 														<div class="post">
 															<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
@@ -136,13 +133,14 @@ get_header('page');
 														<span class="post-date"><?php the_date('F j, Y') ?></span>
 													</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
-													<p><?php the_content() ?></p>
+													<p class="post-content"><?php the_content() ?></p>
 												</div>
 											</div>
 										</div>
-									<!-- /post -->	
+									<!-- /post -->
 
 									<?php
+									$count++;	
 
 								endwhile; // End of the loop.
 							?>
@@ -189,33 +187,6 @@ get_header('page');
 								endwhile; // End of the loop.
 							?>
 
-							<!-- <div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-								</div>
-							</div>
-
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-								</div>
-							</div>
-
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-3.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-								</div>
-							</div>
-
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-4.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-								</div>
-							</div> -->
 						</div>
 						<!-- /post widget -->
 						
