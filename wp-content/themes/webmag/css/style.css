@@ -651,6 +651,13 @@ RESPONSIVE
  .post.post-row .post-title {
      margin-bottom: 15px;
 }
+.post.post-row .post-body p {  /* добавлено */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 /*=========================================================
 	POST PAGE
 ===========================================================*/

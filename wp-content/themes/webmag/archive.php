@@ -19,8 +19,6 @@ get_header('page');
 					<div class="col-md-8">
 						<div class="row">
 
-						<h1>APXИВ</h1>
-
 						<?php if ( have_posts() ) :
 							/* Start the Loop */
 							$count = 0;
@@ -54,6 +52,39 @@ get_header('page');
 											</div>
 										<!-- /post -->
 										<?php
+										$count++;
+										break;
+
+									case 1:
+											
+										global $post;
+										$myposts = get_posts( array(
+											'numberposts' => 2,
+										) );
+
+										foreach( $myposts as $post ){
+												setup_postdata( $post ); 
+												?>
+												<!-- post -->
+													<div class="col-md-6">
+														<div class="post">
+															<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+															<div class="post-body">
+																<div class="post-meta">
+																	<a class="post-category cat-1" href="category.html">
+																		<?php echo get_the_category()[0]->cat_name ?>
+																	</a>
+																	<span class="post-date"><?php the_date('F j, Y') ?></span>
+																</div>
+																<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+															</div>
+														</div>
+													</div>
+												<!-- /post -->														
+											<?php 
+											$count++;
+										} 
+										wp_reset_postdata();
 										break;
 									
 									default:
@@ -61,12 +92,11 @@ get_header('page');
 										break;
 								}
 
-
-								get_template_part( 'template-parts/content', get_post_type() );
+								// get_template_part( 'template-parts/content', get_post_type() );
 
 							endwhile;
 
-							the_posts_navigation();
+							// the_posts_navigation();
 
 							else :
 
@@ -74,38 +104,6 @@ get_header('page');
 
 							endif;
 						?>
-
-							
-										
-							<!-- post -->
-							<div class="col-md-6">
-								<div class="post">
-									<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-									<div class="post-body">
-										<div class="post-meta">
-											<a class="post-category cat-2" href="#">JavaScript</a>
-											<span class="post-date">March 27, 2018</span>
-										</div>
-										<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-									</div>
-								</div>
-							</div>
-							<!-- /post -->
-
-							<!-- post -->
-							<div class="col-md-6">
-								<div class="post">
-									<a class="post-img" href="blog-post.html"><img src="./img/post-6.jpg" alt=""></a>
-									<div class="post-body">
-										<div class="post-meta">
-											<a class="post-category cat-2" href="#">JavaScript</a>
-											<span class="post-date">March 27, 2018</span>
-										</div>
-										<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-									</div>
-								</div>
-							</div>
-							<!-- /post -->
 							
 							<div class="clearfix visible-md visible-lg"></div>
 							
@@ -113,75 +111,40 @@ get_header('page');
 							<div class="col-md-12">
 								<div class="section-row">
 									<a href="#">
-										<img class="img-responsive center-block" src="./img/ad-2.jpg" alt="">
+										<img class="img-responsive center-block" src="<?php echo get_template_directory_uri(); ?>/img/ad-2.jpg" alt="">
 									</a>
 								</div>
 							</div>
 							<!-- ad -->
-							
-							<!-- post -->
-							<div class="col-md-12">
-								<div class="post post-row">
-									<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-									<div class="post-body">
-										<div class="post-meta">
-											<a class="post-category cat-2" href="#">JavaScript</a>
-											<span class="post-date">March 27, 2018</span>
-										</div>
-										<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-									</div>
-								</div>
-							</div>
-							<!-- /post -->
-							
-							<!-- post -->
-							<div class="col-md-12">
-								<div class="post post-row">
-									<a class="post-img" href="blog-post.html"><img src="./img/post-5.jpg" alt=""></a>
-									<div class="post-body">
-										<div class="post-meta">
-											<a class="post-category cat-2" href="#">JavaScript</a>
-											<span class="post-date">March 27, 2018</span>
-										</div>
-										<h3 class="post-title"><a href="blog-post.html">Microsoft’s TypeScript Fills A Long-standing Void In JavaScript</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-									</div>
-								</div>
-							</div>
-							<!-- /post -->
 
-							<!-- post -->
-							<div class="col-md-12">
-								<div class="post post-row">
-									<a class="post-img" href="blog-post.html"><img src="./img/post-3.jpg" alt=""></a>
-									<div class="post-body">
-										<div class="post-meta">
-											<a class="post-category cat-2" href="#">JavaScript</a>
-											<span class="post-date">March 27, 2018</span>
+							<?php
+								while ( have_posts() ) :
+									the_post(); ?>
+
+									<!-- 4 post -->
+										<div class="col-md-12">
+											<div class="post post-row">
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<div class="post-body">
+													<div class="post-meta">
+														<a class="post-category cat-1" href="category.html">
+															<?php echo get_the_category()[0]->cat_name ?>
+														</a>
+														<span class="post-date"><?php the_date('F j, Y') ?></span>
+													</div>
+													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+													<p class="post-content"><?php the_content() ?></p>
+												</div>
+											</div>
 										</div>
-										<h3 class="post-title"><a href="blog-post.html">Javascript : Prototype vs Class</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-									</div>
-								</div>
-							</div>
-							<!-- /post -->
+									<!-- /post -->
+
+									<?php
+									$count++;	
+
+								endwhile; // End of the loop.
+							?>
 							
-							<!-- post -->
-							<div class="col-md-12">
-								<div class="post post-row">
-									<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
-									<div class="post-body">
-										<div class="post-meta">
-											<a class="post-category cat-2" href="#">JavaScript</a>
-											<span class="post-date">March 27, 2018</span>
-										</div>
-										<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-									</div>
-								</div>
-							</div>
-							<!-- /post -->
 							
 							<div class="col-md-12">
 								<div class="section-row">
@@ -195,7 +158,7 @@ get_header('page');
 						<!-- ad -->
 						<div class="aside-widget text-center">
 							<a href="#" style="display: inline-block;margin: auto;">
-								<img class="img-responsive" src="./img/ad-1.jpg" alt="">
+								<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 							</a>
 						</div>
 						<!-- /ad -->
@@ -206,33 +169,24 @@ get_header('page');
 								<h2>Most Read</h2>
 							</div>
 
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-								</div>
-							</div>
+							<?php
+								while ( have_posts() ) :
+									the_post(); ?>
 
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-								</div>
-							</div>
+									<!-- 4 post -->
+										<div class="post post-widget">
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<div class="post-body">
+												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+											</div>
+										</div>
+									<!-- /post -->
 
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-3.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-								</div>
-							</div>
+								<?php
 
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="./img/widget-4.jpg" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-								</div>
-							</div>
+								endwhile; // End of the loop.
+							?>
+
 						</div>
 						<!-- /post widget -->
 						
@@ -293,5 +247,5 @@ get_header('page');
 		<!-- /section -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();
