@@ -164,7 +164,7 @@ RESPONSIVE
 	NAVIGATION
 ===========================================================*/
  #nav {
-     height: 70px;
+     /* height: 70px; убираем */
 }
  #nav:after {
      content: "";
@@ -471,7 +471,7 @@ RESPONSIVE
      margin-bottom: 0px;
 }
  #post-header.page-header h1 {
-     color: #FFF;
+     /* color: #FFF;  // убираем */
 }
  .page-header .post-meta {
      margin: 15px 0px;

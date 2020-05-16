@@ -439,10 +439,10 @@ get_header(); // если get_header(); то тут выводит файл head
 												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
 												<div class="post-body">
 													<div class="post-meta">
-													<a class="post-category cat-1" href="category.html">
-														<?php echo get_the_category()[0]->cat_name ?>
-													</a>
-													<span class="post-date"><?php the_date('F j, Y') ?></span>
+														<a class="post-category cat-1" href="category.html">
+															<?php echo get_the_category()[0]->cat_name ?>
+														</a>
+														<span class="post-date"><?php the_date('F j, Y') ?></span>
 													</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 												</div>
