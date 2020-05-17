@@ -78,13 +78,18 @@
 			<div id="nav-aside">
 				<!-- nav -->
 				<!-- // в любом месте шаблона можем вызвать наше 'nav-aside-menu'// для этого вызываю функцию wp_nav_menu -->
-				<?php wp_nav_menu( [ // Выводит произвольное меню, созданное в панели: "внешний вид > меню" 
-					'theme_location'  => 'nav-aside-menu', // указывается при регистрации меню функцией register_nav_menu() - какое именно меню навигации выводить
-					// 'menu'            => 'nav-aside-menu',
-					'container'       => 'div', // наш container завернут в div
-					'container_class' => 'section-row', // класс контейнера из html <div class="section-row">
-					'menu_class'      => 'nav-aside-menu', // класс меню (ul) из html <ul class="nav-aside-menu">
-				] ) ?>
+				<?php 
+					wp_nav_menu( [ // Выводит произвольное меню, созданное в панели: "внешний вид > меню" 
+						'theme_location'  => 'nav-aside-menu', // указывается при регистрации меню функцией register_nav_menu() - какое именно меню навигации выводить
+						// 'menu'            => 'nav-aside-menu',
+						'container'       => 'div', // наш container завернут в div
+						'container_class' => 'section-row', // класс контейнера из html <div class="section-row">
+						'menu_class'      => 'nav-aside-menu', // класс меню (ul) из html <ul class="nav-aside-menu">
+					] );
+
+					// the_widget( 'WP_Widget_Pages', array('nav_menu' => 'sidebar-menu') );
+					// the_widget( 'WP_Nav_Menu_Widget', array('nav_menu' => 'sidebar-menu') );
+				?>
 				<!-- <div class="section-row"> // было статическое меню в html
 					<ul class="nav-aside-menu">
 						<li><a href="index.html">Home</a></li>
@@ -98,6 +103,9 @@
 
 				<!-- widget posts -->
 				<div class="section-row">
+
+					<?php get_sidebar( 'menu' ); ?>
+
 					<h3>Recent Posts</h3>
 
 					<?php
@@ -118,7 +126,7 @@
 									<div class="post post-widget">
 										<!-- <a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a> -->
 										<a class="post-img" href="<?php the_permalink() ?>"> <!--  the_permalink() выводит ссылку на пост -->
-											<?php the_post_thumbnail() ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста -->
+											<?php the_post_thumbnail('post-thumb-sidebar') ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста -->
 										</a>
 										<div class="post-body">
 											<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3> <!-- the_title() - это функция, которая позволяет вывести заголовок статьи -->
@@ -134,6 +142,7 @@
 		
 						wp_reset_postdata(); // сбрасываем переменную $post
 					?>
+					<!-- /цикл widget posts -->
 
 					<!-- <div class="post post-widget">
 						<a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a>

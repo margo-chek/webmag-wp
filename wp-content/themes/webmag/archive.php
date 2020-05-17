@@ -7,7 +7,7 @@
  * @package Webmag
  */
 
-get_header('page');
+get_header('archive');
 ?>
 
 	<!-- section -->
@@ -38,7 +38,7 @@ get_header('page');
 										<!-- post -->
 											<div class="col-md-12">
 												<div class="post post-thumb">
-													<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+													<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-first') ?></a>
 													<div class="post-body">
 														<div class="post-meta">
 															<a class="post-category cat-1" href="category.html">
@@ -68,7 +68,7 @@ get_header('page');
 												<!-- post -->
 													<div class="col-md-6">
 														<div class="post">
-															<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+															<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 															<div class="post-body">
 																<div class="post-meta">
 																	<a class="post-category cat-1" href="category.html">
@@ -124,7 +124,7 @@ get_header('page');
 									<!-- 4 post -->
 										<div class="col-md-12">
 											<div class="post post-row">
-												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-widget-thumb') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
 														<a class="post-category cat-1" href="category.html">
@@ -175,7 +175,7 @@ get_header('page');
 
 									<!-- 4 post -->
 										<div class="post post-widget">
-											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-sidebar') ?></a>
 											<div class="post-body">
 												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 											</div>

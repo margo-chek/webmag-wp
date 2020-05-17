@@ -45,7 +45,16 @@ if ( ! function_exists( 'webmag_setup' ) ) :
 		 *
 		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		 */
-		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'post-thumbnails' ); // разрешает использовать миниатюры
+		add_image_size( 'widget-thumb', 200, 200, false ); // создаем новую миниатюру, имя д.б. уникальным, размер и обрезаем (false - масштабируем, true - кадрируем)
+		add_image_size( 'post-thumb-first', 750, 450, true );
+		add_image_size( 'post-thumb', 670, 402, true );
+		add_image_size( 'post-thumb-top-index', 555, 333, true );
+		add_image_size( 'post-thumb-index', 360, 216, true );
+		add_image_size( 'post-widget-thumb', 300, 180, true );
+		add_image_size( 'post-thumb-sidebar', 90, 90, true );
+		add_image_size( 'post-bg', 1920, 270, true );
+		// https://wp-kama.ru/function/get_the_post_thumbnail_url — выводим миниатюру в верстке - н-р, the_post_thumbnail( 'post-thumb' )
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(  // отвечает за регистрацию нашего меню (регистрирует сразу несколько меню)
@@ -143,6 +152,28 @@ function webmag_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar Index', 'webmag' ),
+			'id'            => 'sidebar-index',
+			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
+			'before_widget' => '<div class="aside-widget %2$s" id="%1$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<div class="section-title"><h2>',
+			'after_title'   => '</h2></div>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar Menu Aside', 'webmag' ),
+			'id'            => 'sidebar-menu-aside',
+			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
+			'before_widget' => '',
+			'after_widget'  => '',
+			'before_title'  => '<h3>',
+			'after_title'   => '</h3>',
+		)
+	);
 }
 add_action( 'widgets_init', 'webmag_widgets_init' );
 
@@ -190,6 +221,28 @@ add_action( 'wp_enqueue_scripts', 'webmag_scripts' ); // ловим событи
 
 add_filter('show_admin_bar', '__return_false'); // отключить админ бар
 
+add_filter( 'get_the_archive_title', function( $title ) { // Удаляет префикс "Рубрика: ", "Метка: " и т.д. из заголовка архива
+	return preg_replace('~^[^:]+: ~', '', $title );
+});
+
+// разделитель заголовка страницы
+function my_sep($sep) {
+	return ' | ';
+} // my_sep
+add_filter('document_title_separator', 'my_sep');
+
+// function add_span_cat_count($text) { // как-то модифицируем то, что нам прислали, и отправляем обратно измененным
+// 	return $text . "123";
+// }
+// add_filter('wp_list_categories', 'add_span_cat_count'); // перехватываем хуком wp_list_categories вывод списка категорий
+function add_span_cat_count($text) {
+	$str = str_replace('</a> (', '<span>', $text); // что - </a> (, на что - <span>, где меняем - $text
+	$str = str_replace(')', '</span></a>', $str);
+	return $str;
+}
+add_filter('wp_list_categories', 'add_span_cat_count');
+
+
 /**
  * Implement the Custom Header feature.
  */
@@ -216,3 +269,24 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+function show_email() {
+	return 'mail@mail.ru';
+}
+
+add_shortcode( 'email', 'show_email' ); // 'email' - tag, как называется наш шорткод, 'show_email' - функция, которая будет показывать/выводить этот шорткод
+
+function generate_iframe( $atts ) {
+	$atts = shortcode_atts( array( // параметры по умолчанию
+		'href'   => 'http://www.youtube.com', // заглушка, если ссылка не сработает
+		'height' => '480px',
+		'width'  => '720px', // 640px - со скролом
+	), $atts );
+
+	return '<iframe src="'. $atts['href'] .'" width="'. $atts['width'] .'" height="'. $atts['height'] .'"> <p>Your Browser does not support Iframes.</p></iframe>';
+}
+
+add_shortcode('iframe', 'generate_iframe');
+// использование: [iframe href="http://www.youtube.com" height="480" width="640"]
+// [iframe src="https://www.youtube.com/embed/S8VuUv4hwEo" height="315"  width="560"] // вот это вставляю в админке
+// [iframe href="https://www.youtube.com/embed/OOED6Bb9nV8"  height="480" width="640"]

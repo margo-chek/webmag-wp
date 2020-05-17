@@ -46,7 +46,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<div class="col-md-6">
 								<div class="post post-thumb">
 									<a class="post-img" href="<?php the_permalink() ?>"> <!--  the_permalink() выводит ссылку на пост -->
-										<?php the_post_thumbnail() ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста -->
+										<?php the_post_thumbnail( 'post-thumb-top-index' ) ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста, 'post-thumb' - размер картинки, задан в function.php -->
 									</a>
 									<div class="post-body">
 										<div class="post-meta">
@@ -73,22 +73,8 @@ get_header(); // если get_header(); то тут выводит файл head
 
 					wp_reset_postdata(); // сбрасываем переменную $post
 				?>
-				<!-- /post -->
+				<!-- /цикл posts_per_page -->
 
-				<!-- post -->
-				<!-- <div class="col-md-6">
-					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-3" href="category.html">Jquery</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-						</div>
-					</div>
-				</div> -->
-				<!-- /post -->
 			</div>
 			<!-- /row -->
 
@@ -118,7 +104,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<div class="col-md-4">
 								<div class="post">
 									<a class="post-img" href="<?php the_permalink() ?>">
-										<?php the_post_thumbnail() ?>
+										<?php the_post_thumbnail('post-thumb-index') ?>
 									</a>
 									<div class="post-body">
 										<div class="post-meta">
@@ -144,7 +130,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 				<div class="clearfix visible-md visible-lg"></div>  <!-- можно удалить -->
 
-				<!-- Цикл на основе get_posts() -->
+				<!-- Цикл posts на основе get_posts() -->
 				<?php
 					global $post;
 
@@ -162,7 +148,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<!-- post // вставка из index.html -->
 								<div class="col-md-4">
 									<div class="post">
-										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 										<div class="post-body">
 											<div class="post-meta">
 											<a class="post-category cat-1" href="category.html">
@@ -184,51 +170,8 @@ get_header(); // если get_header(); то тут выводит файл head
 	
 					wp_reset_postdata(); // сбрасываем переменную $post
 				?>
+				<!-- /Цикл posts на основе get_posts() -->
 
-				<!-- post -->
-				<!-- <div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src=./img/post-6.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-2" href="category.html">JavaScript</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-						</div>
-					</div>
-				</div> -->
-				<!-- /post -->
-
-				<!-- post -->
-				<!-- <div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-4" href="category.html">Css</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
-						</div>
-					</div>
-				</div> -->
-				<!-- /post -->
-
-				<!-- post -->
-				<!-- <div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-1" href="category.html">Web Design</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-						</div>
-					</div>
-				</div> -->
-				<!-- /post -->
 			</div>
 			<!-- /row -->
 
@@ -247,7 +190,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									?>
 										<div class="col-md-12">
 											<div class="post post-thumb">
-											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-first') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
 														<a class="post-category cat-1" href="category.html">
@@ -265,20 +208,7 @@ get_header(); // если get_header(); то тут выводит файл head
 	
 							wp_reset_query(); // сбрасываем глобальные переменные запроса на начальные
 						?>
-
-						<!-- <div class="col-md-12">
-							<div class="post post-thumb">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-3" href="category.html">Jquery</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
+						<!-- /post // Цикл на основе query_posts() -->
 
 						<!-- post // Цикл на основе query_posts() -->
 						<?php
@@ -291,7 +221,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									?>
 										<div class="col-md-6">
 											<div class="post">
-												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
 														<a class="post-category cat-1" href="category.html">
@@ -309,38 +239,7 @@ get_header(); // если get_header(); то тут выводит файл head
 	
 							wp_reset_query(); // сбрасываем глобальные переменные запроса на начальные
 						?>
-
 						<!-- /post // Цикл на основе query_posts() -->
-
-						<!-- post -->
-						<!-- <div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-4" href="category.html">Css</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-
-						<!-- post -->
-						<!-- <div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-1" href="category.html">Web Design</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
 
 						<div class="clearfix visible-md visible-lg"></div>  <!-- можно удалить -->
 
@@ -362,7 +261,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									<!-- post // вставка из index.html -->
 										<div class="col-md-6">
 											<div class="post">
-												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
 													<a class="post-category cat-1" href="category.html">
@@ -384,40 +283,11 @@ get_header(); // если get_header(); то тут выводит файл head
 			
 							wp_reset_postdata(); // сбрасываем переменную $post
 						?>
-
-						<!-- post -->
-						<!-- <div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-4.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-2" href="category.html">JavaScript</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-
-						<!-- post -->
-						<!-- <div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-5.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-3" href="category.html">Jquery</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
+						<!-- /Цикл posts -->
 
 						<div class="clearfix visible-md visible-lg"></div>  <!-- можно удалить -->
 
-						<!-- Цикл на основе get_posts() -->
+						<!-- Цикл posts на основе get_posts() -->
 						<?php
 							global $post;
 
@@ -436,7 +306,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									<!-- post // вставка из index.html -->
 										<div class="col-md-6">
 											<div class="post">
-												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
 														<a class="post-category cat-1" href="category.html">
@@ -458,36 +328,8 @@ get_header(); // если get_header(); то тут выводит файл head
 			
 							wp_reset_postdata(); // сбрасываем переменную $post
 						?>
-
-						<!-- post -->
-						<!-- <div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-3.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-1" href="category.html">Web Design</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-
-						<!-- post -->
-						<!-- <div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-4.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-2" href="category.html">JavaScript</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
+						<!-- /Цикл posts на основе get_posts() -->
+ 
 					</div>
 				</div>
 
@@ -515,7 +357,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									// стандартный вывод записей?>
 									<!-- post // вставка из index.html -->
 										<div class="post post-widget">
-											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-widget-thumb') ?></a>
 											<div class="post-body">
 												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 											</div>
@@ -531,33 +373,6 @@ get_header(); // если get_header(); то тут выводит файл head
 							wp_reset_postdata(); // сбрасываем переменную $post
 						?>
 
-						<!-- <div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/widget-1.jpg" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-							</div>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/widget-2.jpg" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-							</div>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/widget-3.jpg" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-							</div>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/widget-4.jpg" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-							</div>
-						</div> -->
 					</div>
 					<!-- /post widget -->
 
@@ -567,7 +382,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<h2>Featured Posts</h2>
 						</div>
 
-						<!-- Цикл на основе get_posts() -->
+						<!-- Цикл posts widget на основе get_posts() -->
 						<?php
 							global $post;
 
@@ -585,7 +400,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									// стандартный вывод записей?>
 									<!-- post // вставка из index.html -->
 										<div class="post post-thumb">
-											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 											<div class="post-body">
 												<div class="post-meta">
 													<a class="post-category cat-1" href="category.html">
@@ -606,6 +421,7 @@ get_header(); // если get_header(); то тут выводит файл head
 			
 							wp_reset_postdata(); // сбрасываем переменную $post
 						?>
+						<!-- /Цикл posts widget -->
 
 						<!-- <div class="post post-thumb">
 							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-2.jpg" alt=""></a>
@@ -658,7 +474,7 @@ get_header(); // если get_header(); то тут выводит файл head
 					</div>
 				</div>
 
-				<!-- Цикл на основе get_posts() -->
+				<!-- Цикл posts на основе get_posts() -->
 				<?php
 					global $post;
 
@@ -676,7 +492,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							<!-- post // вставка из index.html -->
 								<div class="col-md-4">
 									<div class="post">
-										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 										<div class="post-body">
 											<div class="post-meta">
 												<a class="post-category cat-1" href="category.html">
@@ -698,51 +514,8 @@ get_header(); // если get_header(); то тут выводит файл head
 	
 					wp_reset_postdata(); // сбрасываем переменную $post
 				?>
+				<!-- /Цикл posts на основе get_posts() -->
 
-				<!-- post -->
-				<!-- <div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-2" href="category.html">JavaScript</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-						</div>
-					</div>
-				</div> -->
-				<!-- /post -->
-
-				<!-- post -->
-				<!-- <div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-5.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-3" href="category.html">Jquery</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-						</div>
-					</div>
-				</div> -->
-				<!-- /post -->
-
-				<!-- post -->
-				<!-- <div class="col-md-4">
-					<div class="post">
-						<a class="post-img" href="blog-post.html"><img src="./img/post-3.jpg" alt=""></a>
-						<div class="post-body">
-							<div class="post-meta">
-								<a class="post-category cat-1" href="category.html">Web Design</a>
-								<span class="post-date">March 27, 2018</span>
-							</div>
-							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-						</div>
-					</div>
-				</div> -->
-				<!-- /post -->
 			</div>
 			<!-- /row -->
 		</div>
@@ -764,7 +537,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							</div>
 						</div>
 
-						<!-- Цикл на основе get_posts() -->
+						<!-- Цикл posts на основе get_posts() -->
 						<?php
 							global $post;
 
@@ -782,7 +555,7 @@ get_header(); // если get_header(); то тут выводит файл head
 									<!-- post // вставка из index.html -->
 										<div class="col-md-12">
 											<div class="post post-row">
-												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-widget-thumb') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
 														<a class="post-category cat-1" href="category.html">
@@ -805,70 +578,7 @@ get_header(); // если get_header(); то тут выводит файл head
 			
 							wp_reset_postdata(); // сбрасываем переменную $post
 						?>
-
-						<!-- post -->
-						<!-- <div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-4.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-2" href="category.html">JavaScript</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-
-						<!-- post -->
-						<!-- <div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-6.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-2" href="category.html">JavaScript</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-
-						<!-- post -->
-						<!-- <div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-4" href="category.html">Css</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">CSS Float: A Tutorial</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
-						
-						<!-- post -->
-						<!-- <div class="col-md-12">
-							<div class="post post-row">
-								<a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-meta">
-										<a class="post-category cat-3" href="category.html">Jquery</a>
-										<span class="post-date">March 27, 2018</span>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-								</div>
-							</div>
-						</div> -->
-						<!-- /post -->
+						<!-- / Цикл posts -->
 						
 						<div class="col-md-12">
 							<div class="section-row">
@@ -882,15 +592,23 @@ get_header(); // если get_header(); то тут выводит файл head
 					<!-- ad -->
 					<div class="aside-widget text-center">
 						<a href="#" style="display: inline-block;margin: auto;">
-							<img class="img-responsive" src="./img/ad-1.jpg" alt="">
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 						</a>
 					</div>
 					<!-- /ad -->
+
+					<!-- categories -->
+					<?php
+						get_sidebar('index'); // можно вызвать тут сайдбар sidebar-index, но у него не будет нужных стилей
+						// the_widget('WP_Widget_Categories'); // вызов виджета вне сайдбара
+						// dynamic_sidebar( 'sidebar-index' ); // можно сразу тут вызвать после регистрации в function.php - вызов сайдбара просто в определенном месте, например в footere
+					?>
+					<!-- /categories -->
 					
-					<!-- catagories -->
-					<div class="aside-widget">
+					<!-- categories замененный статический код на любой из блока выше-->
+					<!-- <div class="aside-widget">
 						<div class="section-title">
-							<h2>Catagories</h2>
+							<h2>Categories</h2>
 						</div>
 						<div class="category-widget">
 							<ul>
@@ -900,8 +618,8 @@ get_header(); // если get_header(); то тут выводит файл head
 								<li><a href="#" class="cat-3">CSS<span>35</span></a></li>
 							</ul>
 						</div>
-					</div>
-					<!-- /catagories -->
+					</div> -->
+					<!-- /categories -->
 					
 					<!-- tags -->
 					<div class="aside-widget">
@@ -928,6 +646,6 @@ get_header(); // если get_header(); то тут выводит файл head
 	</div>
 	<!-- /section -->
 
-<?php
+<?php 
 // get_sidebar();
 get_footer();

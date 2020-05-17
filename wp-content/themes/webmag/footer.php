@@ -35,6 +35,13 @@
 							<span>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
+
+							<?php echo do_shortcode( '[email]' ); ?>
+							<!-- do_shortcode(1параметр, 2параметр) просматривает текст на наличие в нем шорткодов и применяет зарегистрированные функции к найденным шорткодам. 
+							Функция обработает только шорткоды, о которых WP знает, которые зарегистрированы как шорткоды с помощью функции add_shortcode() 
+							1-ый параметр: '[email]' - текст в котором нужно преобразовать шорткоды
+							2-ой параметр: true, то шорткоды внутри HTML обработаны не будут, по умолчанию: false  -->
+
 						</div>
 					</div>
 				</div>

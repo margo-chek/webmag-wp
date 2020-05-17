@@ -118,7 +118,7 @@
 									<div class="post post-widget">
 										<!-- <a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a> -->
 										<a class="post-img" href="<?php the_permalink() ?>"> <!--  the_permalink() выводит ссылку на пост -->
-											<?php the_post_thumbnail() ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста -->
+											<?php the_post_thumbnail('post-thumb-sidebar') ?> <!-- the_post_thumbnail() - Выводит html код картинки-миниатюры текущего поста -->
 										</a>
 										<div class="post-body">
 											<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3> <!-- the_title() - это функция, которая позволяет вывести заголовок статьи -->
@@ -159,13 +159,12 @@
 		<!-- /Nav -->
 
 		<!-- Page Header -->
-		<div id="post-header" class="page-header">
-			<!-- <div class="background-img" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/post-page.jpg');"></div> -->
+		<div class="page-header">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10">
 						<ul class="page-header-breadcrumb">
-							<li><a href="index.html">Home</a></li>
+							<li><a href="<?php echo home_url(); ?>">Home</a></li> <!-- home_url с wp_kama-->
 							<li><?php the_title() ?></li>
 						</ul>
 						<h1><?php the_title() ?></h1>
