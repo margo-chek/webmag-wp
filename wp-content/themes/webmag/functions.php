@@ -290,3 +290,36 @@ add_shortcode('iframe', 'generate_iframe');
 // использование: [iframe href="http://www.youtube.com" height="480" width="640"]
 // [iframe src="https://www.youtube.com/embed/S8VuUv4hwEo" height="315"  width="560"] // вот это вставляю в админке
 // [iframe href="https://www.youtube.com/embed/OOED6Bb9nV8"  height="480" width="640"]
+
+add_action('init', 'my_custom_init'); // прицепляем хук action во время события init мы вызываем функцию my_custom_init
+function my_custom_init(){
+	register_post_type('lesson', array(
+		'labels'             => array(
+			'name'               => 'Уроки', // Основное название типа записи
+			'singular_name'      => 'Урок', // отдельное название записи типа Book
+			'add_new'            => 'Добавить новый',
+			'add_new_item'       => 'Добавить новый урок',
+			'edit_item'          => 'Редактировать урок',
+			'new_item'           => 'Новый урок',
+			'view_item'          => 'Посмотреть урок',
+			'search_items'       => 'Найти урок',
+			'not_found'          => 'Уроков не найдено',
+			'not_found_in_trash' => 'В корзине уроков не найдено',
+			'parent_item_colon'  => '',
+			'menu_name'          => 'Уроки'
+
+			),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'menu_icon'			 => 'dashicons-welcome-learn-more',
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => 22,
+		'supports'           => array('title','editor','author','thumbnail','excerpt','comments')
+	) );
+}

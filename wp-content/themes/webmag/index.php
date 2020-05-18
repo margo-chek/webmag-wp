@@ -31,7 +31,7 @@ get_header(); // если get_header(); то тут выводит файл head
 					global $post; // создается глобальная переменная $post, в нее будут помещаться параметры постов
 
 					$query = new WP_Query( [ // создается переменная $query, куда помещается новый класс WP_Query с разными параметрами-атрибутами
-						'posts_per_page' => 2, // вывести 5 постов на странице
+						'posts_per_page' => 2, // вывести 3 поста на странице - если не задать, выведется по умолчанию 5 постов
 						'orderby'        => 'title', // сортировать посты по комментариям 'comment_count' или заголовкам 'title'
 					] );
 
@@ -75,6 +75,49 @@ get_header(); // если get_header(); то тут выводит файл head
 				?>
 				<!-- /цикл posts_per_page -->
 
+			</div>
+			<!-- /row -->
+
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title">
+						<h2>Lesson</h2>
+					</div>
+				</div>
+				<!-- lesson -->
+				<?php
+					global $post;
+					$myposts = get_posts( array(
+						'post_type' => 'lesson',
+						'numberposts' => 4,
+					) );
+
+					if (!empty($myposts)) {
+						
+						foreach( $myposts as $post ){
+							setup_postdata( $post ); 
+							?>
+							<!-- post -->
+								<div class="col-md-6">
+									<div class="post">
+										<a class="post-img" href="<?php the_permalink() ?>">
+											<?php the_post_thumbnail( 'post-thumb-top-index' ) ?>
+										</a>
+										<div class="post-body">
+											<h3 class="post-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
+										</div>
+									</div>
+								</div>
+							<!-- /post -->															
+						<?php 
+						} 				
+					} else {
+						echo "Уроков нет";
+					}
+					wp_reset_postdata(); // сбрасываем переменную $post
+				?>
+				<!-- /lesson -->
 			</div>
 			<!-- /row -->
 
