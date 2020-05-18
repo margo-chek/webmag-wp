@@ -242,6 +242,8 @@ function add_span_cat_count($text) {
 }
 add_filter('wp_list_categories', 'add_span_cat_count');
 
+remove_filter('the_content', 'wptexturize'); // решение при проблеме с кавычками,  при копировании теста, ковычки заменялись на другие...
+
 
 /**
  * Implement the Custom Header feature.
@@ -307,7 +309,6 @@ function my_custom_init(){
 			'not_found_in_trash' => 'В корзине уроков не найдено',
 			'parent_item_colon'  => '',
 			'menu_name'          => 'Уроки'
-
 			),
 		'public'             => true,
 		'publicly_queryable' => true,
@@ -322,4 +323,92 @@ function my_custom_init(){
 		'menu_position'      => 22,
 		'supports'           => array('title','editor','author','thumbnail','excerpt','comments')
 	) );
+}
+
+
+add_action('init', 'my_video_init');
+function my_video_init(){
+	register_post_type('video', array(
+		'labels'             => array(
+			'name'               => 'Видео',
+			'singular_name'      => 'Видео',
+			'add_new'            => 'Добавить новое',
+			'add_new_item'       => 'Добавить новое видео',
+			'edit_item'          => 'Редактировать видео',
+			'new_item'           => 'Новое видео',
+			'view_item'          => 'Посмотреть видео',
+			'search_items'       => 'Найти видео',
+			'not_found'          => 'Видео не найдено',
+			'not_found_in_trash' => 'В корзине видео не найдено',
+			'parent_item_colon'  => '',
+			'menu_name'          => 'Видео'
+			),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'menu_icon'			 => 'dashicons-video-alt',
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => 23,
+		'supports'           => array('title','editor','author','thumbnail','excerpt','comments')
+	) );
+}
+
+
+// хук, через который подключается функция
+// регистрирующая новые таксономии (create_video_taxonomies)
+add_action( 'init', 'create_video_taxonomies' );
+
+// функция, создающая 2 новые таксономии "genres" и "authors" для постов типа "video"
+function create_video_taxonomies(){
+
+	// Добавляем древовидную таксономию 'genre' (как категории)
+	register_taxonomy('genre', array('video'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => _x( 'Жанры', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Genre', 'taxonomy singular name' ),
+			'search_items'      =>  __( 'Search Genres' ),
+			'all_items'         => __( 'All Genres' ),
+			'parent_item'       => __( 'Parent Genre' ),
+			'parent_item_colon' => __( 'Parent Genre:' ),
+			'edit_item'         => __( 'Edit Genre' ),
+			'update_item'       => __( 'Update Genre' ),
+			'add_new_item'      => __( 'Добавить новый жанр' ),
+			'new_item_name'     => __( 'New Genre Name' ),
+			'menu_name'         => __( 'Жанры' ),
+		),
+		'show_ui'       => true,
+		'query_var'     => true,
+		'rewrite'       => array( 'slug' => 'the_genre' ), // есть свой собственный слаг в URL
+	));
+
+	// Добавляем НЕ древовидную таксономию 'author' (как метки)
+	register_taxonomy('author', 'video', array(
+		'hierarchical'  => false,
+		'labels'        => array(
+			'name'                        => _x( 'Авторы', 'taxonomy general name' ),
+			'singular_name'               => _x( 'Author', 'taxonomy singular name' ),
+			'search_items'                =>  __( 'Search Authors' ),
+			'popular_items'               => __( 'Popular Authors' ),
+			'all_items'                   => __( 'All Authors' ),
+			'parent_item'                 => null,
+			'parent_item_colon'           => null,
+			'edit_item'                   => __( 'Edit Author' ),
+			'update_item'                 => __( 'Update Author' ),
+			'add_new_item'                => __( 'Add New Author' ),
+			'new_item_name'               => __( 'New Author Name' ),
+			'separate_items_with_commas'  => __( 'Separate authors with commas' ),
+			'add_or_remove_items'         => __( 'Add or remove authors' ),
+			'choose_from_most_used'       => __( 'Choose from the most used authors' ),
+			'menu_name'                   => __( 'Авторы' ),
+		),
+		'show_ui'       => true,
+		'query_var'     => true,
+		'rewrite'       => array( 'slug' => 'the_author' ), // свой слаг в URL
+	));
 }
