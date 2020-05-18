@@ -277,7 +277,7 @@ function show_email() {
 add_shortcode( 'email', 'show_email' ); // 'email' - tag, как называется наш шорткод, 'show_email' - функция, которая будет показывать/выводить этот шорткод
 
 function generate_iframe( $atts ) {
-	$atts = shortcode_atts( array( // параметры по умолчанию
+	$atts = shortcode_atts( array( // параметры по умолчанию - если не передали
 		'href'   => 'http://www.youtube.com', // заглушка, если ссылка не сработает
 		'height' => '480px',
 		'width'  => '720px', // 640px - со скролом
