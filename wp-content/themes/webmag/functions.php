@@ -412,3 +412,34 @@ function create_video_taxonomies(){
 		'rewrite'       => array( 'slug' => 'the_author' ), // свой слаг в URL
 	));
 }
+
+// add_filter('the_title', 'filter_symbol_the_title'); // мы подключаемся к хуку-событию the_title, выполняем функцию echo_the_title, дальше могут стоять приоритет или параметры, которые попадают в этот фильтр внутри функции
+function filter_symbol_the_title($title, $length=30) { // обрезаем строку-заголовок по количеству символов
+	if ( mb_strlen($title) <= $length)
+		return $title ;
+
+	$string = mb_substr( $title, 0, $length ); // функцией mb_substr() мы обрезаем наш $title на $length символах
+	$string = rtrim($string, "?!,.-");
+	$pos = strrpos($string, " ");
+	$string = mb_substr($string, 0, $pos);
+
+	$string .= ' ...';
+
+	return $string; // возвращаем измененное значение
+}
+
+add_filter('the_title', 'echo_trim_words');
+function echo_trim_words($title) { // обрезаем строку-заголовок по количеству слов
+	return wp_trim_words( $title, 5, ' ...' );
+}
+
+// add_filter('the_content', 'social_after_content');
+function social_after_content($title) { // добавляем иконки соцсетей после контента
+	return $content .=
+	'<div class="nav-aside-social">
+		<a href="#"><i class="fa fa-facebook"></i></a>
+		<a href="#"><i class="fa fa-twitter"></i></a>
+		<a href="#"><i class="fa fa-google-plus"></i></a>
+		<a href="#"><i class="fa fa-pinterest"></i></a>
+	</div>';
+}
