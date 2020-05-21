@@ -1,0 +1,12 @@
+/**
+ * Theme Name:  Webmag Child
+ * Template:    webmag
+ * Author: Margo
+ * Version: 1.0
+ */
+
+/* @import url(../parent-theme/style.css); */
+
+body {
+    background-color: rgb(218, 220, 224) !important;
+}

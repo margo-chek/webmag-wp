@@ -12,7 +12,9 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', '1.0.0' );
 }
 
-if ( ! function_exists( 'webmag_setup' ) ) :
+// чтобы тема была гибкой, есе функции, которые должны быть изменяемыми/гибкими надо проверять на наличие таких функций в дочерней теме
+// если функция такая уже создана, то этот блок пропускается, а если нет - то создается
+if ( ! function_exists( 'webmag_setup' ) ) : // если я хочу обновить или поменять функцию webmag_setup() - если эта функция не была создана до этого, то надо ее создать
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
