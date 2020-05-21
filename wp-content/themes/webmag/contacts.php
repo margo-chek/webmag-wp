@@ -54,6 +54,9 @@ get_header('page');
 
 								<div class="row">
 									<div class="col-md-7">
+										<?php the_field('address'); ?>
+									</div>
+									<div class="col-md-7">
 										<div class="form-group">
 											<span>Email</span>
 											<input class="input" type="email" name="email">
