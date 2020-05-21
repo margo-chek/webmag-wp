@@ -536,6 +536,7 @@ get_header(); // если get_header(); то тут выводит файл head
 					
 					<!-- ad -->
 					<div class="aside-widget text-center">
+						<h2>Реклама тут</h2>
 						<a href="#" style="display: inline-block;margin: auto;">
 							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 						</a>
@@ -678,6 +679,7 @@ get_header(); // если get_header(); то тут выводит файл head
 				<div class="col-md-4">
 					<!-- ad -->
 					<div class="aside-widget text-center">
+						<h2>Реклама еще тут</h2>
 						<a href="#" style="display: inline-block;margin: auto;">
 							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 						</a>
