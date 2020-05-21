@@ -56,8 +56,8 @@ if ( ! function_exists( 'webmag_setup' ) ) : // если я хочу обнов�
 		add_image_size( 'post-widget-thumb', 300, 180, true );
 		add_image_size( 'post-thumb-sidebar', 90, 90, true );
 		add_image_size( 'post-bg', 1920, 270, true );
-		add_image_size( 'post-ad1', 300, 250, true );
-		add_image_size( 'post-ad2', 728, 90, true );
+		add_image_size( 'ad1-thumbnails', 300, 250, true );
+		add_image_size( 'ad2-thumbnails', 728, 90, true );
 		// https://wp-kama.ru/function/get_the_post_thumbnail_url — выводим миниатюру в верстке - н-р, the_post_thumbnail( 'post-thumb' )
 
 		// This theme uses wp_nav_menu() in one location.

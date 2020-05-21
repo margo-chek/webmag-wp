@@ -523,8 +523,10 @@ get_header(); // если get_header(); то тут выводит файл head
 					<!-- ad -->
 					<div class="aside-widget text-center">
 						<a href="#" style="display: inline-block; margin: auto;">
-							<?php the_post_thumbnail('post-ad1') ?>
+							<!-- <?php the_post_thumbnail('ad1-thumbnails') ?> -->
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 						</a>
+						<h2>Реклама</h2> <!-- Почему нет??? -->
 					</div>
 					<!-- /ad -->
 				</div>
@@ -568,7 +570,7 @@ get_header(); // если get_header(); то тут выводит файл head
 										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 										<div class="post-body">
 											<div class="post-meta">
-												<a class="post-category cat-1" href="category.html">
+												<a class="post-category cat-1" href="category.html">  <!-- href="<?php get_post_type_archive_link(); ?>"> -->
 													<?php echo get_the_category()[0]->cat_name ?>
 												</a>
 												<span class="post-date"><?php the_date('F j, Y') ?></span>
