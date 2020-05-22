@@ -119,6 +119,7 @@ RESPONSIVE
      padding: 0px 15px;
      -webkit-transition: 0.2s border;
      transition: 0.2s border;
+     margin-bottom: 4px; /* добавлено */
 }
  .input:focus {
      border-color: #3d455c;
@@ -938,19 +939,21 @@ RESPONSIVE
 }
  .footer-newsletter form > input.input {
      padding-right: 55px;
+     margin-bottom: 4px;
 }
- .footer-newsletter form > .newsletter-btn {
-     position: absolute;
+ .footer-newsletter form > .newsletter-btn {  /* [submit class:newsletter-btn "Отправить"]  */
+     /* position: absolute;
      top: 0;
      right: 0;
-     height: 40px;
+     height: 40px; */
      line-height: 40px;
-     width: 40px;
+     width: 100%; /* width: 40px; */
+     margin-top: 8px;
      text-align: center;
-     color: #a7b3c6;
-     background: transparent;
+     color: #fff; /*  #a7b3c6; */
+     background: green;
      border: none;
-     border-radius: 0px 2px 2px 0px;
+     border-radius: 4px;
      -webkit-transition: 0.2s opacity;
      transition: 0.2s opacity;
 }
