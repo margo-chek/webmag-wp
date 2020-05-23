@@ -545,7 +545,7 @@ RESPONSIVE
      text-decoration: none;
      opacity: 0.9;
 }
- .post-meta .post-category.cat-item-17 {
+ .post-meta .post-category.cat-item-17 {  /* .post-meta a.cat-item-17 { */
      background-color: #4BB92F;
 }
  .post-meta .post-category.cat-item-18 {
