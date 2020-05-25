@@ -85,12 +85,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<?php echo do_shortcode('[contact-form-7 id="175" title="Newsletter"]') ?>
 							<!-- </form> -->
 						</div>
-						<ul class="footer-social">
+						<?php 
+							wp_nav_menu( [ // Выводит произвольное меню, созданное в панели: "внешний вид > меню" 
+								'theme_location'  => 'social-links-footer-menu', // указывается при регистрации меню функцией register_nav_menu() - какое именно меню навигации выводить
+								'container'       => 'false', // нашу меню ul не завернуто в контейнер
+								'menu_class'      => 'footer-social', // класс меню (ul) из html <ul class="footer-social">
+							] );
+
+							// the_widget( 'WP_Widget_Pages', array('nav_menu' => 'sidebar-menu') );
+							// the_widget( 'WP_Nav_Menu_Widget', array('nav_menu' => 'sidebar-menu') );
+						?>
+						<!-- <ul class="footer-social">
 							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
+						</ul> -->
 					</div>
 				</div>
 

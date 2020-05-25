@@ -39,9 +39,11 @@ get_header(); // если get_header(); то тут выводит файл head
 						while ( $query->have_posts() ) { // пока в $query есть посты
 							$query->the_post(); // мы будем их выводить при помощи функции the_post()
 							?>
+							<!-- the_post(); - на экран ничего не выводит, но заполняет/устанавливает переменные для дальнейшего использования (the_title, the_content, the_category...) -->
 							<!-- Вывода постов, функции цикла: the_title() и т.д. // как мы будем их выводить, можем тут указать -->
 							<!-- например мы используем тег li, в нем выводим с помощью php-разметки the_title() -->
-							<!-- the_title() - это функция, которая позволяет вывести заголовок статьи -->
+							<!-- the_title() - это функция, которая позволяет вывести заголовок статьи = echo title // печатает эта команда -->
+							<!-- get_the_title() - это функция, которая позволяет получить заголовок статьи = return title // возвращает какую-то информацию -->
 							<!-- post // вставка из index.html -->
 							<div class="col-md-6">
 								<div class="post post-thumb">
@@ -178,13 +180,13 @@ get_header(); // если get_header(); то тут выводит файл head
 					global $post;
 
 					$query = new WP_Query( [
-						'posts_per_page' => 6,
+						'posts_per_page' => 6, // сколько постов вывести на данной странице с учетом пагинации
 						'orderby'        => 'comment_count',
 					] );
 
 					if ( $query->have_posts() ) {
 						while ( $query->have_posts() ) {
-							$query->the_post();
+							$query->the_post(); // the_post(); - на экран ничего не выводит, но заполняет/устанавливает переменные для дальнейшего использования (the_title, the_content, the_category...)
 							?>
 							<!-- Вывода постов, функции цикла: the_title() и т.д. -->
 							<!-- post // вставка из index.html -->
@@ -223,7 +225,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 					$myposts = get_posts( array(
 						'numberposts' => 3,
-						// 'offset'=> 1,
+						// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
 					) );
 
 					if (!empty($myposts)) {
@@ -271,7 +273,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							query_posts('posts_per_page=1');
 							if (have_posts()) {
 								while (have_posts()) {
-									the_post();
+									the_post(); // на экран ничего не выводит, но заполняет/устанавливает переменные для дальнейшего использования (the_title, the_content, the_category...)
 									// the_title();
 									// the_content();
 									?>
@@ -302,7 +304,7 @@ get_header(); // если get_header(); то тут выводит файл head
 							query_posts('posts_per_page=2&order=ASC');
 							if (have_posts()) {
 								while (have_posts()) {
-									the_post();
+									the_post();  // на экран ничего не выводит, но заполняет/устанавливает переменные для дальнейшего использования (the_title, the_content, the_category...)
 									// the_title();
 									// the_content();
 									?>
@@ -336,7 +338,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 2,
-								// 'offset'=> 1,
+								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
 							) );
 
 							if (!empty($myposts)) {
@@ -380,7 +382,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 2,
-								// 'offset'=> 1,
+								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
 								'order'       => 'ASC',
 							) );
 
@@ -433,7 +435,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 4,
-								// 'offset'=> 1,
+								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
 							) );
 
 							if (!empty($myposts)) {
@@ -475,7 +477,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 2,
-								// 'offset'=> 1,
+								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
 								'category'    => 4,
 							) );
 
@@ -568,7 +570,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 					$myposts = get_posts( array(
 						'numberposts' => 3,
-						// 'offset'=> 1,
+						// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
 					) );
 
 					if (!empty($myposts)) {
@@ -631,7 +633,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 4,
-								// 'offset'=> 1,
+								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
 							) );
 
 							if (!empty($myposts)) {

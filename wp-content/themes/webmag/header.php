@@ -170,7 +170,18 @@
 				<!-- /widget posts -->
 
 				<!-- social links -->
-				<div class="section-row">
+				<?php 
+					wp_nav_menu( [ // Выводит произвольное меню, созданное в панели: "внешний вид > меню" 
+						'theme_location'  => 'social-links-aside-menu', // указывается при регистрации меню функцией register_nav_menu() - какое именно меню навигации выводить
+						'container'       => 'div', // наш container завернут в div
+						'container_class' => 'section-row', // класс контейнера из html <div class="section-row">
+						'menu_class'      => 'nav-aside-social', // класс меню (ul) из html <ul class="nav-aside-social">
+					] );
+
+					// the_widget( 'WP_Widget_Pages', array('nav_menu' => 'sidebar-menu') );
+					// the_widget( 'WP_Nav_Menu_Widget', array('nav_menu' => 'sidebar-menu') );
+				?>
+				<!-- <div class="section-row">
 					<h3>Follow us</h3>
 					<ul class="nav-aside-social">
 						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -178,7 +189,7 @@
 						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
 					</ul>
-				</div>
+				</div> -->
 				<!-- /social links -->
 
 				<!-- aside nav close -->

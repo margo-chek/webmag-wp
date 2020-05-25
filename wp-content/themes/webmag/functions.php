@@ -71,6 +71,9 @@ if ( ! function_exists( 'webmag_setup' ) ) : // если я хочу обнов�
 				'nav-aside-menu' => esc_html__( 'Nav Aside', 'webmag' ), // так стало
 				'policy-footer-menu' => esc_html__( 'Policy', 'webmag' ),
 				'about-us-footer-menu' => esc_html__( 'About Us', 'webmag' ),
+				'social-links-aside-menu' => esc_html__( 'Social Aside', 'webmag' ),
+				'social-links-footer-menu' => esc_html__( 'Social Footer', 'webmag' ),
+				'social-links-post-menu' => esc_html__( 'Social Post', 'webmag' ),
 			)
 		);
 
@@ -245,6 +248,13 @@ function add_span_cat_count($text) {
 	return $str;
 }
 add_filter('wp_list_categories', 'add_span_cat_count');
+
+function my_widget_title($input) {
+	if (substr($input, 0, 1) != "!") // substr() - функция, возвращает подстроку в строке (в какой строке, начиная с какой позиции - с нулевого символа, в количестве - один символ)
+		return $input;
+	else return null;
+}
+add_filter( 'widget_title', 'my_widget_title' ); // в параметрах сначала сам хук - название, затем название функции, которую нуно выполнить во время срабатывания этого хука
 
 remove_filter('the_content', 'wptexturize'); // решение при проблеме с кавычками,  при копировании теста, ковычки заменялись на другие...
 
@@ -432,7 +442,7 @@ function filter_symbol_the_title($title, $length=30) { // обрезаем ст�
 	return $string; // возвращаем измененное значение
 }
 
-add_filter('the_title', 'echo_trim_words');
+//  add_filter('the_title', 'echo_trim_words'); // заодно обрезает вывод иконок соцсетей???
 function echo_trim_words($title) { // обрезаем строку-заголовок по количеству слов
 	return wp_trim_words( $title, 5, ' ...' );
 }

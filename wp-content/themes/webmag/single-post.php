@@ -80,6 +80,13 @@
 											<h3>John Doe</h3>
 										</div>
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+										<?php
+											wp_nav_menu( [
+												'theme_location'  => 'social-links-post-menu',
+												'container'       => 'false',
+												'menu_class'      => 'author-social',
+											] )
+										?>
 										<ul class="author-social">
 											<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 											<li><a href="#"><i class="fa fa-twitter"></i></a></li>
