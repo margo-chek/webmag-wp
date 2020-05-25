@@ -32,23 +32,22 @@ get_header('archive');
 								*/
 
 								// для цикла из 7 постов (после шести Recent Posts)
-								foreach ( $mypost as $key => $post ) { // для while не сработает, он не умеет считать? только для for и foreach
-									setup_postdata( $post );
-									if ($key === 3 || $key === 5) echo '<div class="clearfix visible-md visible-lg"></div>';
-									?>
+								// foreach ( $mypost as $key => $post ) { // для while не сработает, он не умеет считать? только для for и foreach
+								// 	setup_postdata( $post );
+								// 	if ($key === 3 || $key === 5) echo '<div class="clearfix visible-md visible-lg"></div>';
+								// 	?>
 										<!-- post -->
-										<?php if ($key > 0) { ?>
-											<div class="col-md-6">
+										<?php //if ($key > 0) { ?>
+											<!-- <div class="col-md-6">
 												<div class="post">
 													<a class="post-img"> .... </a>
 												</div>
-											</div>
-										<?php } else { ?>
-											<div class="col-md-12">
+											</div> -->
+										<?php //} else { ?>
+											<!-- <div class="col-md-12">
 												<div class="post post-thumb"> ... </div>
-											</div>
-										<?php }
-								}
+											</div> -->
+										<?php //}
 								// 
 								
 								switch ($count) {
