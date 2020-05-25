@@ -432,19 +432,23 @@ function filter_symbol_the_title($title, $length=30) { // обрезаем ст�
 	if ( mb_strlen($title) <= $length)
 		return $title ;
 
-	$string = mb_substr( $title, 0, $length ); // функцией mb_substr() мы обрезаем наш $title на $length символах
-	$string = rtrim($string, "?!,.-");
-	$pos = strrpos($string, " ");
-	$string = mb_substr($string, 0, $pos);
+		$string = mb_substr( $title, 0, $length ); // функцией mb_substr() мы обрезаем наш $title на $length символах
+		$string = rtrim($string, "?!,.-");
+		$pos = strrpos($string, " ");
+		$string = mb_substr($string, 0, $pos);
 
-	$string .= ' ...';
+		$string .= ' ...';
 
-	return $string; // возвращаем измененное значение
+		return $string; // возвращаем измененное значение
 }
 
-//  add_filter('the_title', 'echo_trim_words'); // заодно обрезает вывод иконок соцсетей???
+add_filter('the_title', 'echo_trim_words'); // заодно обрезает вывод иконок соцсетей???
 function echo_trim_words($title) { // обрезаем строку-заголовок по количеству слов
-	return wp_trim_words( $title, 5, ' ...' );
+	if (substr($title, 0, 2) !== "<i") {
+		return wp_trim_words( $title, 5, ' ...' );
+	} else {
+		return $title;
+	}
 }
 
 // add_filter('the_content', 'social_after_content');
