@@ -465,3 +465,76 @@ function social_after_content($title) { // добавляем иконки со�
 // Contact Form 7 remove auto added p tags
 add_filter('wpcf7_autop_or_not', '__return_false');
 
+
+// цепляемся к кастомайзеру
+// add_action( 'customize_register', 'customizer_init' );
+
+// function customizer_init( WP_Customize_Manager $wp_customize ) {
+	
+// 	$transport = 'postMessage'; // 'postMessage' - обновлять превью сайта: отправкой AJAX запроса
+
+// 	// секция
+// 	if ( $section = 'advanced_options' ) {
+
+// 		// Добавляем ещё одну секцию - Настройки фона // Код аналитики
+// 		$wp_customize->add_section( $section, [
+// 			'title'    => 'Код аналитики', // ввести название, например, 'Настройки фона'
+// 			'priority' => 10, // приоритет установим: 10 - в самом верху ( 201 - внизу списка выводит)
+// 		] );
+
+// 		// настройка
+// 		$setting = 'analytics_code'; // меняем название - его передаем параметром в функцию передачи данных
+
+// 		$wp_customize->add_setting( $setting, [
+// 			'default'      => '', // по умолчанию - фоновое изображение не установлено
+// 			'transport'    => $transport
+// 		] );
+
+// 		$wp_customize->add_control(
+// 			new WP_Customize_Image_Control( $wp_customize, $setting, [
+// 				'label'    => 'Вставьте код сюда', // 'Фон сайта'
+// 				'type'     => 'textarea', // добавляем тип поля
+// 				'settings' => $setting, // 'bg_image' - при помощи переменной подставляем (из // настройки)
+// 				'section'  => $section // 'advanced_options' - так же при помощи переменной
+// 			] )
+// 		);
+
+// 	}
+
+// }
+
+add_action( 'customize_register', 'customizer_init' );
+
+function customizer_init( WP_Customize_Manager $wp_customize ) {
+	
+	$transport = 'postMessage';
+
+	// секция
+	if ( $section = 'advanced_options' ) {
+
+		// Добавляем ещё одну секцию - Код аналитики
+		$wp_customize->add_section( $section, [
+			'title'    => 'Код аналитики',
+			'priority' => 10,
+		] );
+
+		// настройка
+		$setting = 'analytics_code';
+
+		$wp_customize->add_setting( $setting, [
+			'default'      => '',
+			'transport'    => $transport
+		] );
+
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control( $wp_customize, $setting, [
+				'label'    => 'Вставьте код сюда',
+				'type'     => 'textarea',
+				'settings' => $setting,
+				'section'  => $section
+			] )
+		);
+
+	}
+
+}
