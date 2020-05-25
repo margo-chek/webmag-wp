@@ -52,15 +52,19 @@ get_header(); // если get_header(); то тут выводит файл head
 									</a>
 									<div class="post-body">
 										<div class="post-meta">
-											<a class="post-category cat-1" href="category.html"> <!-- href="category.html" // the_permalink() -->
-												<?php echo get_the_category()[0]->cat_name ?> <!-- get_the_category возвращает массив категорий -->
+											<!-- <a class="post-category cat-item-<?php // echo get_the_category()[0]->cat_ID; ?>" href="category.html"> href="category.html" // the_permalink() -->
+												<?php // echo get_the_category()[0]->cat_name ?> <!-- get_the_category() возвращает массив категорий -->
 												<!-- если несколько категорий:
 												$all_categories = get_the_category();
 												foreach ($all_categories as $category) {
 												echo $category->cat_name;
 												}  -->
+											<!-- </a> -->
+											<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+													href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
+												<?php echo get_the_category()[0]->cat_name ?>
 											</a>
-											<span class="post-date"><?php the_date('F j, Y') ?></span>
+											<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 										</div>
 										<h3 class="post-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
 									</div>
@@ -197,10 +201,11 @@ get_header(); // если get_header(); то тут выводит файл head
 									</a>
 									<div class="post-body">
 										<div class="post-meta">
-											<a class="post-category cat-1" href="category.html">
+											<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+													href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 												<?php echo get_the_category()[0]->cat_name ?>
 											</a>
-											<span class="post-date"><?php the_date('F j, Y') ?></span>
+											<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 										</div>
 										<h3 class="post-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
 									</div>
@@ -225,7 +230,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 					$myposts = get_posts( array(
 						'numberposts' => 3,
-						// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
+						'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
 					) );
 
 					if (!empty($myposts)) {
@@ -240,10 +245,11 @@ get_header(); // если get_header(); то тут выводит файл head
 										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 										<div class="post-body">
 											<div class="post-meta">
-											<a class="post-category cat-1" href="category.html">
-												<?php echo get_the_category()[0]->cat_name ?>
-											</a>
-											<span class="post-date"><?php the_date('F j, Y') ?></span>
+												<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+														href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
+													<?php echo get_the_category()[0]->cat_name ?>
+												</a>
+												<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 											</div>
 											<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 										</div>
@@ -282,10 +288,11 @@ get_header(); // если get_header(); то тут выводит файл head
 											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-first') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
-														<a class="post-category cat-1" href="category.html">
+														<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 															<?php echo get_the_category()[0]->cat_name ?>
 														</a>
-														<span class="post-date"><?php the_date('F j, Y') ?></span>
+														<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 													</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 												</div>
@@ -313,10 +320,11 @@ get_header(); // если get_header(); то тут выводит файл head
 												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
-														<a class="post-category cat-1" href="category.html">
+														<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 															<?php echo get_the_category()[0]->cat_name ?>
 														</a>
-														<span class="post-date"><?php the_date('F j, Y') ?></span>
+														<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 													</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 												</div>
@@ -338,7 +346,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 2,
-								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
+								'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
 							) );
 
 							if (!empty($myposts)) {
@@ -353,10 +361,11 @@ get_header(); // если get_header(); то тут выводит файл head
 												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
-													<a class="post-category cat-1" href="category.html">
-														<?php echo get_the_category()[0]->cat_name ?>
-													</a>
-													<span class="post-date"><?php the_date('F j, Y') ?></span>
+														<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
+															<?php echo get_the_category()[0]->cat_name ?>
+														</a>
+														<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 													</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 												</div>
@@ -382,7 +391,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 2,
-								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
+								'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
 								'order'       => 'ASC',
 							) );
 
@@ -398,10 +407,11 @@ get_header(); // если get_header(); то тут выводит файл head
 												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
-														<a class="post-category cat-1" href="category.html">
+														<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 															<?php echo get_the_category()[0]->cat_name ?>
 														</a>
-														<span class="post-date"><?php the_date('F j, Y') ?></span>
+														<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 													</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 												</div>
@@ -423,7 +433,7 @@ get_header(); // если get_header(); то тут выводит файл head
 				</div>
 
 				<div class="col-md-4">
-					<!-- post widget -->
+					<!-- post widget --> <?php // get_sidebar('index-top'); ?>
 					<div class="aside-widget">
 						<div class="section-title">
 							<h2>Most Read</h2>
@@ -435,7 +445,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 4,
-								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
+								'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
 							) );
 
 							if (!empty($myposts)) {
@@ -477,7 +487,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 2,
-								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
+								'offset'	  => 0, // с учетом пагинации смещение/отступ от первого поста
 								'category'    => 4,
 							) );
 
@@ -492,10 +502,11 @@ get_header(); // если get_header(); то тут выводит файл head
 											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 											<div class="post-body">
 												<div class="post-meta">
-													<a class="post-category cat-1" href="category.html">
+													<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+															href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 														<?php echo get_the_category()[0]->cat_name ?>
 													</a>
-													<span class="post-date"><?php the_date('F j, Y') ?></span>
+													<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 												</div>
 												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 											</div>
@@ -570,7 +581,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 					$myposts = get_posts( array(
 						'numberposts' => 3,
-						// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
+						'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
 					) );
 
 					if (!empty($myposts)) {
@@ -585,10 +596,11 @@ get_header(); // если get_header(); то тут выводит файл head
 										<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 										<div class="post-body">
 											<div class="post-meta">
-												<a class="post-category cat-1" href="category.html">
+												<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+														href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 													<?php echo get_the_category()[0]->cat_name ?>
 												</a>
-												<span class="post-date"><?php the_date('F j, Y') ?></span>
+												<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 											</div>
 											<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 										</div>
@@ -633,7 +645,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							$myposts = get_posts( array(
 								'numberposts' => 4,
-								// 'offset'=> 1, // с учетом пагинации смещение/отступ от первого поста
+								'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
 							) );
 
 							if (!empty($myposts)) {
@@ -648,13 +660,16 @@ get_header(); // если get_header(); то тут выводит файл head
 												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-widget-thumb') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
-														<a class="post-category cat-1" href="category.html">
+														<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 															<?php echo get_the_category()[0]->cat_name ?>
 														</a>
-														<span class="post-date"><?php the_date('F j, Y') ?></span>
+														<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 													</div>
-													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
-													<p><?php the_content() ?></p>
+													<h3 class="post-title">
+														<a href="<?php the_permalink() ?>"><?php the_title() ?></a> <!-- href="blog-post.html" -->
+													</h3>
+													<p><?php the_content() ?></p> <!-- the_excerpt() вместо the_content() -->
 												</div>
 											</div>
 										</div>
@@ -675,17 +690,20 @@ get_header(); // если get_header(); то тут выводит файл head
 								<button class="primary-button center-block">Load More</button>
 							</div>
 						</div>
+						<?php // get_template_part( 'template-parts/load-more' ); ?> <!-- вместо <div class="col-md-12" ... />div> -->
+
 					</div>
 				</div>
 
 				<div class="col-md-4">
 					<!-- ad -->
-					<div class="aside-widget text-center">
+					<?php // get_template_part( 'template-parts/ad-300x250' ); ?>
+					<!-- <div class="aside-widget text-center">
 						<h2>Реклама еще тут</h2>
 						<a href="#" style="display: inline-block;margin: auto;">
 							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 						</a>
-					</div>
+					</div> -->
 					<!-- /ad -->
 
 					<!-- categories -->

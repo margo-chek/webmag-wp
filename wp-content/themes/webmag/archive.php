@@ -31,7 +31,26 @@ get_header('archive');
 								* called content-___.php (where ___ is the Post Type name) and that will be used instead.
 								*/
 
-								// if ($count === 3 || $count === 5) echo '<div class="clearfix visible-md visible-lg"></div>';
+								// для цикла из 7 постов (после шести Recent Posts)
+								foreach ( $mypost as $key => $post ) { // для while не сработает, он не умеет считать? только для for и foreach
+									setup_postdata( $post );
+									if ($key === 3 || $key === 5) echo '<div class="clearfix visible-md visible-lg"></div>';
+									?>
+										<!-- post -->
+										<?php if ($key > 0) { ?>
+											<div class="col-md-6">
+												<div class="post">
+													<a class="post-img"> .... </a>
+												</div>
+											</div>
+										<?php } else { ?>
+											<div class="col-md-12">
+												<div class="post post-thumb"> ... </div>
+											</div>
+										<?php }
+								}
+								// 
+								
 								switch ($count) {
 									case 0:
 										?>
@@ -41,10 +60,11 @@ get_header('archive');
 													<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-first') ?></a>
 													<div class="post-body">
 														<div class="post-meta">
-															<a class="post-category cat-1" href="category.html">
+															<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																	href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 																<?php echo get_the_category()[0]->cat_name ?>
 															</a>
-															<span class="post-date"><?php the_date('F j, Y') ?></span>
+															<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 														</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 													</div>
@@ -71,10 +91,11 @@ get_header('archive');
 															<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
 															<div class="post-body">
 																<div class="post-meta">
-																	<a class="post-category cat-1" href="category.html">
+																	<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																			href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 																		<?php echo get_the_category()[0]->cat_name ?>
 																	</a>
-																	<span class="post-date"><?php the_date('F j, Y') ?></span>
+																	<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 																</div>
 																<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 															</div>
@@ -127,10 +148,11 @@ get_header('archive');
 												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-widget-thumb') ?></a>
 												<div class="post-body">
 													<div class="post-meta">
-														<a class="post-category cat-1" href="category.html">
+														<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+																href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
 															<?php echo get_the_category()[0]->cat_name ?>
 														</a>
-														<span class="post-date"><?php the_date('F j, Y') ?></span>
+														<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 													</div>
 													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
 													<p class="post-content"><?php the_content() ?></p>
@@ -155,6 +177,7 @@ get_header('archive');
 					</div>
 					
 					<div class="col-md-4">
+
 						<!-- ad -->
 						<div class="aside-widget text-center">
 							<a href="#" style="display: inline-block;margin: auto;">
@@ -177,7 +200,7 @@ get_header('archive');
 										<div class="post post-widget">
 											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-sidebar') ?></a>
 											<div class="post-body">
-												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+												<h3 class="post-title"><a href="blog-post.html"><?php the_title(); ?></a></h3>
 											</div>
 										</div>
 									<!-- /post -->
