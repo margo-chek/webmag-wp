@@ -188,7 +188,6 @@ add_action( 'widgets_init', 'webmag_widgets_init' );
  * Enqueue scripts and styles.
  */
 function webmag_scripts() {
-	wp_enqueue_style( 'webmag-style', get_stylesheet_uri() ); // подключаем главный файл стилей style.css - который в корне
 
 	// подключим наши стили wp_enqueue_style(атрибуты: $handle - название скрипта/стиля, $src - путь, где лежит этот файл,
 	// $deps - от каких других стилей зависит этот стиль, т.е. после каких стилей подключать этот файл со стилями,
@@ -197,6 +196,7 @@ function webmag_scripts() {
 	wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/css/bootstrap.min.css' );
 	wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
 	wp_enqueue_style( 'main-style', get_template_directory_uri() . '/css/style.css' ); // изменения 07.05.
+	wp_enqueue_style( 'webmag-style', get_stylesheet_uri() ); // подключаем главный файл стилей style.css - который в корне
 
 	wp_style_add_data( 'webmag-style', 'rtl', 'replace' );
 
@@ -289,20 +289,36 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 function show_email() {
 	return 'mail@mail.ru';
 }
-
 add_shortcode( 'email', 'show_email' ); // 'email' - tag, как называется наш шорткод, 'show_email' - функция, которая будет показывать/выводить этот шорткод
 
-function generate_iframe( $atts ) {
+function generate_iframe( $atts ) { // функция отсеивает все лишнее и передает параметры по умолчанию, если они необходимы
 	$atts = shortcode_atts( array( // параметры по умолчанию - если не передали
 		'href'   => 'http://www.youtube.com', // заглушка, если ссылка не сработает
 		'height' => '480px',
-		'width'  => '720px', // 640px - со скролом
+		'width'  => '640px', // 640px - со скролом, 720px - полный экран виден
 	), $atts );
 
-	return '<iframe src="'. $atts['href'] .'" width="'. $atts['width'] .'" height="'. $atts['height'] .'"> <p>Your Browser does not support Iframes.</p></iframe>';
-}
+	// проверим переданные параметры
+	if (is_numeric($atts['width']) && $atts['width'] > 1 && $atts['width'] < 1000) {
+		$att_width = $atts['width'];
+	} else {
+		$att_width = '640px'; // если переданный параметр некорректен - взять параметр по умолчанию
+	}
+	if (is_numeric($atts['height']) && $atts['height'] > 1 && $atts['height'] < 1000) {
+		$att_height = $atts['height'];
+	} else {
+		$att_height = '480px'; // если переданный параметр некорректен - взять параметр по умолчанию
+	}
+	if (!empty($atts['href']) && substr($atts['href'], 0, 4) == 'http') {
+		$att_src = $atts['href'];
+	} else {
+		$att_src =' http://www.youtube.com';
+	}
 
-add_shortcode('iframe', 'generate_iframe');
+	// return '<iframe src="'. $atts['href'] .'" width="'. $atts['width'] .'" height="'. $atts['height'] .'"> <p>Your Browser does not support Iframes.</p></iframe>';
+	return "<iframe src='{$att_src}' width='{$att_width}' height='{$att_height}'> <p>Your Browser does not support Iframes.</p></iframe>";
+}
+add_shortcode('video-iframe', 'generate_iframe');
 // использование: [iframe href="http://www.youtube.com" height="480" width="640"]
 // [iframe src="https://www.youtube.com/embed/S8VuUv4hwEo" height="315"  width="560"] // вот это вставляю в админке
 // [iframe href="https://www.youtube.com/embed/OOED6Bb9nV8"  height="480" width="640"]

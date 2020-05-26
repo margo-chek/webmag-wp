@@ -708,7 +708,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 					<!-- categories -->
 					<?php
-						get_sidebar('index'); // можно вызвать тут сайдбар sidebar-index, но у него не будет нужных стилей
+						get_sidebar('index'); // можно вызвать тут сайдбар sidebar-index, но у него не будет нужных стилей: создается отдельный файл после регистрации - предпочтительнее так
 						// the_widget('WP_Widget_Categories'); // вызов виджета вне сайдбара
 						// dynamic_sidebar( 'sidebar-index' ); // можно сразу тут вызвать после регистрации в function.php - вызов сайдбара просто в определенном месте, например в footere
 					?>
