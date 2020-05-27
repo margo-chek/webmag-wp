@@ -50,7 +50,21 @@ get_header('page');
 					<div class="col-md-5 col-md-offset-1">
 						<div class="section-row">
 							<h3>Send A Message</h3>
-							<form> <!-- id='contactForm' method='post' action=''   -->
+
+							<!-- form -->
+							<?php
+								// echo do_shortcode( '[contact-form-7 id="195" title="ContactPage"]' );
+								// echo do_shortcode( '[ninja_form id=3]' );
+							?>
+
+							<!-- именно в файле admin-ajax.php находится обработчик ajax-запросов -->
+							<!-- форму заполнять может как обычный пользователь, так и администратор, но обработчик все равно будет admin-ajax.php -->
+							<!-- назовем нашу функцию send_mail, т.е. мы при помощи GET-запроса к ней указываем ее в action -->
+							<!-- send_mail - это название той функции, которая должна располагаться в function.php, которая будет срабатывать,
+								когда мы отправяем ajax-запрос по admin_url в файл admin-ajax.php -->
+							<!-- атрибут action заносится автоматически в переменную action в файл main.js, и как только мы отправляем нашу форму
+								form.on('submit', ) подставляется url с admin-ajax.php с GET-запросом с названием нашей функции send_mail -->
+							<form name="contactForm" id="contactForm" method="post" action="<?php echo admin_url( 'admin-ajax.php?action=send_mail' ) ?>">
 
 								<div class="row">
 									<div class="col-md-7">
@@ -58,24 +72,31 @@ get_header('page');
 									</div>
 									<div class="col-md-7">
 										<div class="form-group">
-											<span>Email</span>
-											<input class="input" type="email" name="email">
+											<span>Name</span><span class="required">*</span>
+											<input class="input" type="text" name="contactName" id="contactName" size="35" value="" />
+										</div>
+									</div>
+									<div class="col-md-7">
+										<div class="form-group">
+											<span>Email</span><span class="required">*</span>
+											<input class="input" type="email" name="contactEmail" id="contactEmail" size="35" value="" />
 										</div>
 									</div>
 									<div class="col-md-7">
 										<div class="form-group">
 											<span>Subject</span>
-											<input class="input" type="text" name="subject">
+											<input class="input" type="text" name="contactSubject" id="contactSubject" size="35" value="" />
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<textarea class="input" name="message" placeholder="Message"></textarea>
+											<textarea class="input" name="contactMessage" id="contactMessage" placeholder="Message"></textarea>
 										</div>
 										<button class="primary-button">Submit</button>
 									</div>
 								</div>
 							</form>
+							<!-- /form -->
 						</div>
 					</div>
 				</div>

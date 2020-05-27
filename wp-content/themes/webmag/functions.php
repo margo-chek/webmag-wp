@@ -671,3 +671,37 @@ function customizer_init( WP_Customize_Manager $wp_customize ) {
 	}
 
 }
+
+// для выполнения функции send_mail() необходимо сначала подцепиться к двум событиям wp_ajax_названиеФункции и wp_ajax_nopriv_названиеФункции
+add_action( 'wp_ajax_send_mail', 'send_mail' ); // если вы админ - выполнить
+add_action( 'wp_ajax_nopriv_send_mail', 'send_mail' ); // если вы не админ - выполнить
+
+function send_mail() { // для отправки через ajax-запрос формы обратной связи принимаем POST-данные из нашей формы
+	$contactName = $_POST['contactName'];
+	$contactEmail = $_POST['contactEmail'];
+	$contactSubject = $_POST['contactSubject'];
+	$contactMessage = $_POST['contactMessage'];
+
+	// функция wp_mail() отправляет письмо с нашими данными на почту (похожа на mail() в PHP) - берем с https://wp-kama.ru/function/wp_mail
+
+	// подразумевается что $to, $subject, $message уже определены...
+	// $to = 'mnchek@mail.ru'; // создадим переменную, в ней укажем, кому мы пишем письмо - получателя письма напрямую
+	$to = get_option( 'admin_email' ); // либо поставим сюда почту администратора WordPress admin_email
+	// $subject не создаем, у нас уже есть contactSubject и $message = $contactMessage
+
+	// удалим фильтры, которые могут изменять заголовок $headers
+	remove_all_filters( 'wp_mail_from' );
+	remove_all_filters( 'wp_mail_from_name' );
+
+	$headers = array( // нужно определить $headers
+		'From: Me Myself <me@example.net>', // указать от кого
+		'content-type: text/html',
+		'Cc: John Q Codex <jqc@wordpress.org>',
+		'Cc: iluvwp@wordpress.org', // тут можно использовать только простой email адрес
+	);
+
+	// в итоге все отправляется при помощи функции wp_mail() - создается новая заявка, которая упадет в почту
+	wp_mail( $to, $contactSubject, $contactMessage, $headers ); // отправляем непосредственно это письмо
+	wp_die(); // завершаем функцию обязательно - завершаем работу скрипта, который передает информацию во фронтенд, откуда получаем сообщение об удачной отправке или об ошибке
+
+}

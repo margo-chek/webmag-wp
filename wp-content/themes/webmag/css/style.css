@@ -128,6 +128,9 @@ RESPONSIVE
      height: 90px;
      padding: 15px;
 }
+.required {
+    color: red !important;
+}
  .primary-button {
      padding: 9px 45px;
      border: none;

@@ -89,3 +89,42 @@
 	setStickyPos();
 
 })(jQuery);
+
+jQuery(document).ready(function ($) {
+	var form = $('#contactForm'); // создадим переменную, запустим в нее нашу форму обратной связи с id=contactForm
+	var action = form.attr('action'); // достанем из этой формы атрибут action
+
+	form.on('submit', function(event) { // когда эта форма будет отправляться, будет происходить функция
+
+		event.preventDefault(); // сбрасываем стандартное поведение формы
+
+		var formData = { // массив данных, которые будут передаваться с помощью этой формы
+			contactName: $('#contactName').val(),
+			contactEmail: $('#contactEmail').val(),
+			contactSubject: $('#contactSubject').val(),
+			contactMessage: $('#contactMessage').val(),
+		}
+
+		$.ajax({  // ajax-запрос
+			url: action, // url будет браться из самой формы из атрибута action
+			type: 'POST', // передаем методом POST
+			data: formData, // передаваемые данные
+			error: function (request, txtstatus, errorThrown) {
+				console.log(request);
+				console.log(txtstatus);
+				console.log(errorThrown);
+			},
+			success: function() {
+				form.html("Ваша заявка принята к рассмотрению");
+			}
+		});
+		// .done(function() { // что должно случиться, если форма успешно отправилась
+		// 	form.html('Успех!'); // прямо там, где у нас эта форма, пишем Успех
+		// })
+		// .fail(function() { // в случае неуспеха
+		// 	form.html('Провал!'); // пишем Провал
+		// })
+
+	});
+
+});
