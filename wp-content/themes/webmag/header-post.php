@@ -180,15 +180,17 @@
 
 		<!-- Page Header -->
 		<div id="post-header" class="page-header">
-			<div class="background-img" style="background-image: url('<?php echo get_the_post_thumbnail_url( '', 'post-bg' ); ?>/img/post-page.jpg');"></div>
+			<div class="background-img" style="background-image: url('<?php echo get_the_post_thumbnail_url( '', 'post-bg' ); ?>');"></div>
+			<!-- <div class="background-img"><?php //the_post_thumbnail('post-bg') ?></div> -->
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10">
 						<div class="post-meta">
-						<a class="post-category cat-1" href="category.html">
-							<?php echo get_the_category()[0]->cat_name ?>
-						</a>
-						<span class="post-date"><?php the_date('F j, Y') ?></span>
+							<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
+									href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
+								<?php echo get_the_category()[0]->cat_name ?>
+							</a>
+							<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
 						</div>
 						<h1><?php the_title() ?></h1>
 					</div>

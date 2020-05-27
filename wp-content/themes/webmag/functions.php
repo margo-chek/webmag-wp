@@ -161,8 +161,19 @@ function webmag_widgets_init() {
 	);
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar Index', 'webmag' ),
-			'id'            => 'sidebar-index',
+			'name'          => esc_html__( 'Sidebar Index Top', 'webmag' ),
+			'id'            => 'sidebar-index-top',
+			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
+			'before_widget' => '<div class="aside-widget %2$s" id="%1$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<div class="section-title"><h2>',
+			'after_title'   => '</h2></div>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar Index Bottom', 'webmag' ),
+			'id'            => 'sidebar-index-bottom',
 			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
 			'before_widget' => '<div class="aside-widget %2$s" id="%1$s">',
 			'after_widget'  => '</div>',
@@ -179,6 +190,28 @@ function webmag_widgets_init() {
 			'after_widget'  => '',
 			'before_title'  => '<h3>',
 			'after_title'   => '</h3>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar Page', 'webmag' ),
+			'id'            => 'sidebar-page',
+			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
+			'before_widget' => '<div class="aside-widget %2$s" id="%1$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<div class="section-title"><h2>',
+			'after_title'   => '</h2></div>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar Post', 'webmag' ),
+			'id'            => 'sidebar-post',
+			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
+			'before_widget' => '<div class="aside-widget %2$s" id="%1$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<div class="section-title"><h2>',
+			'after_title'   => '</h2></div>',
 		)
 	);
 }
@@ -289,7 +322,8 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 function show_email() {
 	return 'mail@mail.ru';
 }
-add_shortcode( 'email', 'show_email' ); // 'email' - tag, как называется наш шорткод, 'show_email' - функция, которая будет показывать/выводить этот шорткод
+add_shortcode( 'email', 'show_email' ); // 'email' - tag, как называется наш шорткод, 'show_email' - функция, которая будет показывать/выводить этот шорткод  // использование: [email]
+
 
 function generate_iframe( $atts ) { // функция отсеивает все лишнее и передает параметры по умолчанию, если они необходимы
 	$atts = shortcode_atts( array( // параметры по умолчанию - если не передали
@@ -322,6 +356,89 @@ add_shortcode('video-iframe', 'generate_iframe');
 // использование: [iframe href="http://www.youtube.com" height="480" width="640"]
 // [iframe src="https://www.youtube.com/embed/S8VuUv4hwEo" height="315"  width="560"] // вот это вставляю в админке
 // [iframe href="https://www.youtube.com/embed/OOED6Bb9nV8"  height="480" width="640"]
+
+function show_most_read_posts( $atts ) {
+	$atts = shortcode_atts( [ // параметры по умолчанию - если не передали
+		'quantity'  => 4, // количество постов
+	], $atts );
+
+	if (!empty($atts['quantity']) && is_numeric($atts['quantity']) && $atts['quantity'] > 0 && $atts['quantity'] <= 5) {
+		$att_quantity = $atts['quantity'];
+	} else {
+		$att_quantity = 4; // если переданный параметр некорректен - взять параметр по умолчанию
+	}
+
+	global $post;
+	$temp_post = $post;
+
+	$posts = get_posts( array(
+		'numberposts' => $att_quantity,
+		'orderby'     => 'date', // 'comment_count',
+		// 'order'       => 'DESC', // DESC по умолчанию - от большего к меньшему
+	) );
+
+	$result = '';
+
+	foreach( $posts as $post ) {
+		setup_postdata($post); // функция, которая устанавливает все переменные permalink, title, category...
+
+		$result .= '<div class="post post-widget">';
+		$result .= '<a class="post-img" href="' . get_the_permalink($post) . '">' . get_the_post_thumbnail($post, 'post-widget-thumb') . '</a>';
+		$result .= '<div class="post-body">';
+		$result .= '<h3 class="post-title"><a href="' . get_the_permalink($post) . '">' . get_the_title($post) . '</a></h3>';
+		$result .= '</div></div>';
+	}
+
+	wp_reset_postdata(); // сброс
+
+	$post = $temp_post;
+
+	return $result;
+}
+add_shortcode( 'most-read-posts-page', 'show_most_read_posts' ); // использование: [most-read-posts-page quantity=4]
+
+function show_featured_read_posts( $atts ) {
+	$atts = shortcode_atts( [ // параметры по умолчанию - если не передали
+		'quantity'  => 2, // количество постов
+	], $atts );
+
+	if (!empty($atts['quantity']) && is_numeric($atts['quantity']) && $atts['quantity'] > 0 && $atts['quantity'] <= 5) {
+		$att_quantity = $atts['quantity'];
+	} else {
+		$att_quantity = 2; // если переданный параметр некорректен - взять параметр по умолчанию
+	}
+
+	global $post;
+	$temp_post = $post;
+
+	$posts = get_posts( array(
+		'numberposts' => $att_quantity,
+		'orderby'     => 'date', // 'comment_count',
+		// 'order'       => 'DESC', // DESC по умолчанию - от большего к меньшему
+	) );
+
+	$result = '';
+
+	foreach( $posts as $post ) {
+		setup_postdata($post); // функция, которая устанавливает все переменные permalink, title, category...
+
+		$result .= '<div class="post post-thumb">';
+		$result .= '<a class="post-img" href="' . get_the_permalink($post) . '">' . get_the_post_thumbnail($post, 'post-thumb-index') . '</a>';
+		$result .= '<div class="post-body"><div class="post-meta">';
+		$result .= '<a class="post-category cat-item-' . get_the_category($post)[0]->cat_ID . '" href="' . get_category_link( get_the_category($post)[0]->cat_ID ) . '">' . get_the_category($post)[0]->cat_name . '</a>';
+		$result .= '<span class="post-date">' . get_the_date('F j, Y', $post) . '</span></div>';
+		$result .= '<h3 class="post-title"><a href="' . get_the_permalink($post) . '">' . get_the_title($post) . '</a></h3>';
+		$result .= '</div></div>';
+	}
+
+	wp_reset_postdata(); // сброс
+
+	$post = $temp_post;
+
+	return $result;
+}
+add_shortcode('featured-posts-index', 'show_featured_read_posts' ); // использование: [featured-posts-index quantity=2]
+
 
 add_action('init', 'my_custom_init'); // прицепляем хук action во время события init мы вызываем функцию my_custom_init
 function my_custom_init(){

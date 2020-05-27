@@ -434,97 +434,101 @@ get_header(); // если get_header(); то тут выводит файл head
 
 				<div class="col-md-4">
 					<!-- post widget --> <?php // get_sidebar('index-top'); ?>
-					<div class="aside-widget">
-						<div class="section-title">
+					<!-- <div class="aside-widget"> -->
+						<!-- <div class="section-title">
 							<h2>Most Read</h2>
-						</div>
+						</div> -->
 
 						<!-- Цикл на основе get_posts() -->
 						<?php
-							global $post;
+							// global $post;
 
-							$myposts = get_posts( array(
-								'numberposts' => 4,
-								'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
-							) );
+							// $myposts = get_posts( array(
+							// 	'numberposts' => 4,
+							// 	'offset'      => 0, // с учетом пагинации смещение/отступ от первого поста
+							// ) );
 
-							if (!empty($myposts)) {
+							// if (!empty($myposts)) {
 								
-								foreach( $myposts as $post ){
-									setup_postdata( $post ); 
+							// 	foreach( $myposts as $post ){
+							// 		setup_postdata( $post ); 
 
 									// стандартный вывод записей?>
 									<!-- post // вставка из index.html -->
-										<div class="post post-widget">
-											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-widget-thumb') ?></a>
+										<!-- <div class="post post-widget">
+											<a class="post-img" href="<?php //the_permalink() ?>"><?php //the_post_thumbnail('post-widget-thumb') ?></a>
 											<div class="post-body">
-												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+												<h3 class="post-title"><a href="blog-post.html"><?php //the_title() ?></a></h3>
 											</div>
-										</div>
+										</div> -->
 									<!-- /post -->															
 								<?php 
-								} 
+							// 	} 
 								
-							} else {
-								echo "Постов нет";
-							}
+							// } else {
+							// 	echo "Постов нет";
+							// }
 			
-							wp_reset_postdata(); // сбрасываем переменную $post
+							// wp_reset_postdata(); // сбрасываем переменную $post
 						?>
 
-					</div>
+					<!-- </div> -->
 					<!-- /post widget -->
 
+					<?php
+						get_sidebar('index-top');
+					?>
+
 					<!-- post widget -->
-					<div class="aside-widget">
+					<!-- <div class="aside-widget">
 						<div class="section-title">
 							<h2>Featured Posts</h2>
-						</div>
+						</div> -->
 
 						<!-- Цикл posts widget на основе get_posts() -->
 						<?php
-							global $post;
+							// global $post;
 
-							$myposts = get_posts( array(
-								'numberposts' => 2,
-								'offset'	  => 0, // с учетом пагинации смещение/отступ от первого поста
-								'category'    => 4,
-							) );
+							// $myposts = get_posts( array(
+							// 	'numberposts' => 2,
+							// 	'offset'	  => 0, // с учетом пагинации смещение/отступ от первого поста
+							// 	'category'    => 4,
+							// ) );
 
-							if (!empty($myposts)) {
+							// if (!empty($myposts)) {
 								
-								foreach( $myposts as $post ){
-									setup_postdata( $post ); 
+							// 	foreach( $myposts as $post ){
+							// 		setup_postdata( $post ); 
 
 									// стандартный вывод записей?>
 									<!-- post // вставка из index.html -->
-										<div class="post post-thumb">
-											<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail('post-thumb-index') ?></a>
+										<!-- <div class="post post-thumb">
+											<a class="post-img" href="<?php //the_permalink() ?>"><?php //the_post_thumbnail('post-thumb-index') ?></a>
 											<div class="post-body">
 												<div class="post-meta">
-													<a class="post-category cat-item-<?php echo get_the_category()[0]->cat_ID; ?>"
-															href="<?php echo get_category_link( get_the_category()[0]->cat_ID ); ?>"> <!-- href="category.html" -->
-														<?php echo get_the_category()[0]->cat_name ?>
+													<a class="post-category cat-item-<?php //echo get_the_category()[0]->cat_ID; ?>"
+															href="<?php //echo get_category_link( get_the_category()[0]->cat_ID ); ?>">
+														<?php// echo get_the_category()[0]->cat_name ?>
 													</a>
-													<span class="post-date"><?php echo get_the_date('F j, Y'); ?></span>
+													<span class="post-date"><?php //echo get_the_date('F j, Y'); ?></span>
 												</div>
-												<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+												<h3 class="post-title"><a href="blog-post.html"><?php //the_title() ?></a></h3>
 											</div>
-										</div>
+										</div> -->
 									<!-- /post -->															
 								<?php 
-								} 
+							// 	} 
 								
-							} else {
-								echo "Постов нет";
-							}
+							// } else {
+							// 	echo "Постов нет";
+							// }
 			
-							wp_reset_postdata(); // сбрасываем переменную $post
+							// wp_reset_postdata(); // сбрасываем переменную $post
 						?>
 						<!-- /Цикл posts widget -->
 
 						<!-- <div class="post post-thumb">
-							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-2.jpg" alt=""></a>
+							<a class="post-img" href="blog-post.html"><img src="<?php //echo get_template_directory_uri(); ?>/img/post-2.jpg" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
 									<a class="post-category cat-3" href="category.html">Jquery</a>
@@ -535,7 +539,7 @@ get_header(); // если get_header(); то тут выводит файл head
 						</div>
 
 						<div class="post post-thumb">
-							<a class="post-img" href="blog-post.html"><img src="<?php echo get_template_directory_uri(); ?>/img/post-1.jpg" alt=""></a>
+							<a class="post-img" href="blog-post.html"><img src="<?php //echo get_template_directory_uri(); ?>/img/post-1.jpg" alt=""></a>
 							<div class="post-body">
 								<div class="post-meta">
 									<a class="post-category cat-2" href="category.html">JavaScript</a>
@@ -548,12 +552,11 @@ get_header(); // если get_header(); то тут выводит файл head
 					<!-- /post widget -->
 					
 					<!-- ad -->
-					<div class="aside-widget text-center">
-						<h2>Реклама тут</h2>
+					<!-- <div class="aside-widget text-center">
 						<a href="#" style="display: inline-block;margin: auto;">
-							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
+							<img class="img-responsive" src="<?php //echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 						</a>
-					</div>
+					</div> -->
 					<!-- /ad -->
 				</div>
 			</div>
@@ -708,7 +711,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 					<!-- categories -->
 					<?php
-						get_sidebar('index'); // можно вызвать тут сайдбар sidebar-index, но у него не будет нужных стилей: создается отдельный файл после регистрации - предпочтительнее так
+						get_sidebar('index-bottom'); // можно вызвать тут сайдбар sidebar-index, но у него не будет нужных стилей: создается отдельный файл после регистрации - предпочтительнее так
 						// the_widget('WP_Widget_Categories'); // вызов виджета вне сайдбара
 						// dynamic_sidebar( 'sidebar-index' ); // можно сразу тут вызвать после регистрации в function.php - вызов сайдбара просто в определенном месте, например в footere
 					?>

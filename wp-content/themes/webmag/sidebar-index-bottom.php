@@ -7,8 +7,8 @@
  * @package Webmag
  */
 
-if ( ! is_active_sidebar( 'sidebar-index' ) ) {
+if ( ! is_active_sidebar( 'sidebar-index-bottom' ) ) {
 	return;
 }
 
-dynamic_sidebar( 'sidebar-index' );
+dynamic_sidebar( 'sidebar-index-bottom' );

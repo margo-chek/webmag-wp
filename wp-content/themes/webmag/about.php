@@ -48,50 +48,56 @@ Template Post Type: page
 					
 					<!-- aside -->
 					<div class="col-md-4">
+
+						<?php
+							get_sidebar('page');
+						?>
+
+
 						<!-- ad -->
-						<div class="aside-widget text-center">
+						<!-- <div class="aside-widget text-center">
 							<a href="#" style="display: inline-block;margin: auto;">
-								<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
+								<img class="img-responsive" src="<?php //echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 							</a>
-						</div>
+						</div> -->
 						<!-- /ad -->
 
 						<!-- post widget -->
-						<div class="aside-widget">
+						<!-- <div class="aside-widget">
 							<div class="section-title">
 								<h2>Most Read</h2>
-							</div>
+							</div> -->
 
 							<?php
-								global $post;
+								// global $post;
 
-								$myposts = get_posts( array(
-									'numberposts' => 4,
-									// 'offset'=> 1,
-								) );
+								// $myposts = get_posts( array(
+								// 	'numberposts' => 4,
+								// 	'offset'=> 0,
+								// ) );
 
-								if (!empty($myposts)) {
+								// if (!empty($myposts)) {
 									
-									foreach( $myposts as $post ){
-										setup_postdata( $post ); 
+								// 	foreach( $myposts as $post ){
+								// 		setup_postdata( $post ); 
 
 										// стандартный вывод записей?>
 										<!-- post // вставка из index.html -->
-											<div class="post post-widget">
-												<a class="post-img" href="<?php the_permalink() ?>"><?php the_post_thumbnail() ?></a>
+											<!-- <div class="post post-widget">
+												<a class="post-img" href="<?php //the_permalink() ?>"><?php //the_post_thumbnail() ?></a>
 												<div class="post-body">
-													<h3 class="post-title"><a href="blog-post.html"><?php the_title() ?></a></h3>
+													<h3 class="post-title"><a href="blog-post.html"><?php //the_title() ?></a></h3>
 												</div>
-											</div>
+											</div> -->
 										<!-- /post -->															
 									<?php 
-									} 
+								// 	} 
 									
-								} else {
-									echo "Постов нет";
-								}
+								// } else {
+								// 	echo "Постов нет";
+								// }
 				
-								wp_reset_postdata(); // сбрасываем переменную $post
+								// wp_reset_postdata(); // сбрасываем переменную $post
 							?>
 							<!-- <div class="post post-widget">
 								<a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
