@@ -160,13 +160,13 @@
 
 		<!-- Page Header -->
 		<div class="page-header">
-			<div class="background-img" style="background-image: url('<?php echo get_the_post_thumbnail_url( '', 'post-bg' ); ?>');"></div>
+			<!-- <div class="background-img" style="background-image: url('<?php echo get_the_post_thumbnail_url( '', 'post-bg' ); ?>');"></div> -->
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10">
 						<ul class="page-header-breadcrumb">
 							<li><a href="<?php echo home_url(); ?>">Home</a></li>
-							<li><?php the_archive_title( '<li>', '</li>' ); ?></li>
+							<?php the_archive_title( '<li>', '</li>' ); ?>    <!-- <li>....</li> убрали в обертку  -->
 						</ul>
 						<?php the_archive_title( '<h1>', '</h1>' ); ?>
 					</div>

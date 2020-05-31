@@ -32,9 +32,11 @@
 							<li><a href="#">Advertisement</a></li>
 						</ul> -->
 						<div class="footer-copyright">
-							<span>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
+							<!-- <span>&copy; --> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+<!--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> <!--</span> -->
+
+							<span> <?php the_field('footer_text', 44); ?></span> <!-- 44 это идентификатор страницы, к которой привязано наше поле -->
 
 							<?php echo do_shortcode( '[email]' ); ?>
 							<!-- do_shortcode(1параметр, 2параметр) просматривает текст на наличие в нем шорткодов и применяет зарегистрированные функции к найденным шорткодам. 
@@ -64,7 +66,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="footer-widget">
+						<?php get_sidebar('category-footer'); ?>
+							<!-- <div class="footer-widget">
 								<h3 class="footer-title">Catagories</h3>
 								<ul class="footer-links">
 									<li><a href="category.html">Web Design</a></li>
@@ -72,7 +75,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 									<li><a href="category.html">Css</a></li>
 									<li><a href="category.html">Jquery</a></li>
 								</ul>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

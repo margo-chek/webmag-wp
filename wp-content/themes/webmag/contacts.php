@@ -33,7 +33,7 @@ get_header('page');
 									the_post();
 									the_comment(); ?>
 
-									<h3><?php the_title() ?></h3>
+									<h3><?php // the_title() ?></h3>
 									<p><?php the_content() ?></p>
 
 								<?php
@@ -41,9 +41,14 @@ get_header('page');
 							?>
  
  							<ul class="list-style">
-								<li><p><strong>Email:</strong> <a href="#">Webmag@email.com</a></p></li>
-								<li><p><strong>Phone:</strong> 213-520-7376</p></li>
-								<li><p><strong>Address:</strong> 3770 Oliver Street</p></li>
+								<li><p><strong>Email:</strong> <a href="mailto:<?php the_field('contacts_email'); ?>"><?php the_field('contacts_email'); ?></a></p></li>
+								<li><p><strong>Phone:</strong> <?php the_field('contacts_phone'); ?></p></li>
+								<?php 
+									$address = get_field('contacts_address');
+									if ($address) {
+										?><li><p><strong>Address:</strong> <?php echo $address; ?></p></li><?php
+									}
+								?>
 							</ul>
  						</div>
 					</div>

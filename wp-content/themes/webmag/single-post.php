@@ -1,5 +1,7 @@
         
-        <?php get_header('post'); ?>
+		<?php
+		if (have_posts()) the_post();
+		get_header('post'); ?>
 
 		<!-- section -->
 		<div class="section">
@@ -13,10 +15,7 @@
 							<div class="main-post">
 
                             <?php
-                                while ( have_posts() ) :
-                                    the_post();
-
-                                    the_content();
+                                the_content();
 
                                     the_post_navigation(
                                         array(
@@ -29,8 +28,6 @@
                                     if ( comments_open() || get_comments_number() ) :
                                         comments_template();
                                     endif;
-
-                                endwhile; // End of the loop.
                              ?>
 
 								<!-- <h3>Lorem Ipsum: when, and when not to use it</h3>
@@ -61,11 +58,11 @@
 						</div>
 
 						<!-- ad -->
-						<div class="section-row text-center">
+						<!-- <div class="section-row text-center">
 							<a href="#" style="display: inline-block;margin: auto;">
-								<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-2.jpg" alt="">
+								<img class="img-responsive" src="<?php // echo get_template_directory_uri(); ?>/img/ad-2.jpg" alt="">
 							</a>
-						</div>
+						</div> -->
 						<!-- ad -->
 						
 						<!-- author -->
@@ -337,9 +334,9 @@
         ?>
 
 		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
+		<!-- <script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/main.js"></script>
 
 	</body>
-</html>
+</html> -->

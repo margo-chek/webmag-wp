@@ -71,6 +71,7 @@ if ( ! function_exists( 'webmag_setup' ) ) : // если я хочу обнов�
 				'nav-aside-menu' => esc_html__( 'Nav Aside', 'webmag' ), // так стало
 				'policy-footer-menu' => esc_html__( 'Policy', 'webmag' ),
 				'about-us-footer-menu' => esc_html__( 'About Us', 'webmag' ),
+				'categories-footer-menu' => esc_html__( 'Categories Footer', 'webmag' ),
 				'social-links-aside-menu' => esc_html__( 'Social Aside', 'webmag' ),
 				'social-links-footer-menu' => esc_html__( 'Social Footer', 'webmag' ),
 				'social-links-post-menu' => esc_html__( 'Social Post', 'webmag' ),
@@ -212,6 +213,17 @@ function webmag_widgets_init() {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="section-title"><h2>',
 			'after_title'   => '</h2></div>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar Category Footer', 'webmag' ),
+			'id'            => 'sidebar-category-footer',
+			'description'   => esc_html__( 'Add widgets here.', 'webmag' ),
+			'before_widget' => '<div class="footer-widget %2$s" id="%1$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<div class="footer-title"><h3>',
+			'after_title'   => '</h3></div>',
 		)
 	);
 }
@@ -438,6 +450,34 @@ function show_featured_read_posts( $atts ) {
 	return $result;
 }
 add_shortcode('featured-posts-index', 'show_featured_read_posts' ); // использование: [featured-posts-index quantity=2]
+
+
+function show_img_ad( $atts ) {
+	$atts = shortcode_atts( [ // параметры по умолчанию - если не передали
+		'size'  => 1, // номер картинки, которую надо вывести
+	], $atts );
+
+	if (!empty($atts['size']) && is_numeric($atts['size'])) {
+		$att_size = $atts['size'];
+	} else {
+		$att_size = 2; // если переданный параметр некорректен - взять параметр по умолчанию
+	}
+
+	$result = '';
+	if ($att_size == 1) {
+		$result .= '<div class="aside-widget text-center">';
+		$result .= '<a href="#" style="display: inline-block;margin: auto;">';
+		$result .= '<img class="img-responsive" src="' . get_template_directory_uri() . '/img/ad-1.jpg" alt="">';
+	} elseif ($att_size == 2) {
+		$result .= '<div class="section-row text-center">';
+		$result .= '<a href="#" style="display: inline-block;margin: auto;">';
+		$result .= '<img class="img-responsive" src="' . get_template_directory_uri() . '/img/ad-2.jpg" alt="">';
+	}
+	$result .= '</a></div>';
+
+	return $result;
+}
+add_shortcode( 'img-ad', 'show_img_ad' ); // использование: [img-ad size=2]
 
 
 add_action('init', 'my_custom_init'); // прицепляем хук action во время события init мы вызываем функцию my_custom_init

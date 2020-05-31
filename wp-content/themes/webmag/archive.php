@@ -112,7 +112,7 @@ get_header('archive');
 										break;
 								}
 
-								// get_template_part( 'template-parts/content', get_post_type() );
+								// get_template_part( 'inc/content', get_post_type() );
 
 							endwhile;
 
@@ -128,13 +128,17 @@ get_header('archive');
 							<div class="clearfix visible-md visible-lg"></div>
 							
 							<!-- ad -->
-							<div class="col-md-12">
+							<!-- <div class="col-md-12">
 								<div class="section-row">
 									<a href="#">
-										<img class="img-responsive center-block" src="<?php echo get_template_directory_uri(); ?>/img/ad-2.jpg" alt="">
+										<img class="img-responsive center-block" src="<?php // echo get_template_directory_uri(); ?>/img/ad-2.jpg" alt="">
 									</a>
-								</div>
-							</div>
+								</div> -->
+								<?php
+									// echo do_shortcode( '[img-ad size=2]' );
+									get_template_part( 'inc/ad', '2' );
+								?>
+							<!-- </div> -->
 							<!-- ad -->
 
 							<?php
@@ -178,11 +182,15 @@ get_header('archive');
 					<div class="col-md-4">
 
 						<!-- ad -->
-						<div class="aside-widget text-center">
+						<!-- <div class="aside-widget text-center">
 							<a href="#" style="display: inline-block;margin: auto;">
-								<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
+								<img class="img-responsive" src="<?php //echo get_template_directory_uri(); ?>/img/ad-1.jpg" alt="">
 							</a>
-						</div>
+						</div> -->
+						<?php
+							get_template_part( 'inc/ad', '1' );
+							// echo do_shortcode('[img-ad size=1]');
+						?>
 						<!-- /ad -->
 						
 						<!-- post widget -->

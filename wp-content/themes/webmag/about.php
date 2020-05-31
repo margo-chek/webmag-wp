@@ -6,18 +6,14 @@ Template Post Type: page
 
 // … остальной код шаблона
 
-        get_header('page'); ?>
+		if (have_posts()) the_post();
+		get_header('page'); ?>
 
 		<!-- section -->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
-			<?php
-				while ( have_posts() ) :
-					the_post();
-					the_content();
-				endwhile; // End of the loop.
-				?>
+				<?php the_content(); ?>
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-8">
