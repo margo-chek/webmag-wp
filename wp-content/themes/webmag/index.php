@@ -397,7 +397,7 @@ get_header(); // если get_header(); то тут выводит файл head
 
 							if (!empty($myposts)) {
 								
-								foreach( $myposts as $post ){
+								foreach( $myposts as $post ) {
 									setup_postdata( $post ); 
 
 									// стандартный вывод записей?>
